@@ -69,6 +69,10 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+        } 
+        // Снятие выделение с не выбранного элемента
+        else {
+          item.selected = false
         }
         return item;
       })
