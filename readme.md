@@ -104,3 +104,42 @@ setState(newState) {
 ```
 
 ## Задача 3.
+
+Вывести количество совершенных выделений для каждого пункта фразой “Выделяли N раз”. По умолчанию у всех ноль. Фразу с нулём выводить не надо.
+
+### Решение
+
+Добавляем отображение параметра `item.selectionCount` в App компонент
+
+```
+    <div className='Item-title'>
+        {item.title}
+        {/* Добавляем отображение параметра item.selectionCount */}
+        {item.selectionCount > 0 ?`| Выделяли ${item.selectionCount} раз`: '' }
+    </div>
+```
+
+Добавляем увеличение параметра item.selectionCount при выделении элемента в `selectItem` метод класс `Store`
+
+```
+selectItem(code) {
+	this.setState({
+		...this.state,
+		list: this.state.list.map(item => {
+			if (item.code === code) {
+				item.selected = !item.selected;
+
+				// Инициализируем selectionCount to 0 если он undefined
+				item.selectionCount = typeof item.selectionCount === 'undefined' ? 0 : item.selectionCount;
+				// Увеличиваем счетчик выделений
+				item.selectionCount = item.selected ? item.selectionCount + 1 : item.selectionCount;
+			}
+			// Снятие выделение с не выбранного элемента
+			else {
+				item.selected = false
+			}
+			return item;
+		})
+	})
+}
+```

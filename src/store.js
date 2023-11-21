@@ -94,6 +94,11 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          
+          // Инициализируем selectionCount to 0 если он undefined
+          item.selectionCount = typeof item.selectionCount === 'undefined' ? 0 : item.selectionCount;
+          // Увеличиваем счетчик выделений
+          item.selectionCount = item.selected ? item.selectionCount + 1 : item.selectionCount; 
         } 
         // Снятие выделение с не выбранного элемента
         else {
