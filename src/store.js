@@ -3,10 +3,31 @@
  */
 class Store {
   constructor(initState = {}) {
-    this.state = initState;
+    // Проверяем наличие данных в sessionStorage
+    const storedState = sessionStorage.getItem('appState');
+   
+    if (storedState) {
+      const stateFromStorage = JSON.parse(storedState);
+      this.state = {
+        ...stateFromStorage
+        };
+    } else {
+      // Вычисляем максимальное значение code (для первичной загрузки страницы)
+      const initialMaxCode = initState.list
+        ? Math.max(...initState.list.map(item => item.code), 0)
+        : 0;
+      this.state = {
+        list: [...initState.list],
+        //Добавляем максимальное значение code в state
+        maxCode: initialMaxCode
+      };
+      // Сохраняем состояние в sessionStorage
+      sessionStorage.setItem('appState', JSON.stringify(this.state))
+    };
+    
     this.listeners = []; // Слушатели изменений состояния
   }
-
+  
   /**
    * Подписка слушателя на изменения состояния
    * @param listener {Function}
@@ -34,6 +55,8 @@ class Store {
    */
   setState(newState) {
     this.state = newState;
+    // Сохраняем состояние в sessionStorage
+    sessionStorage.setItem('appState', JSON.stringify(this.state))
     // Вызываем всех слушателей
     for (const listener of this.listeners) listener();
   }
@@ -44,7 +67,9 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      // при добавление  элемента изменяем состояние maxCode
+      maxCode: this.state.maxCode + 1,
+      list: [...this.state.list, {code: this.state.maxCode + 1, title: 'Новая запись'}]
     })
   };
 
