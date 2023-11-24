@@ -1,5 +1,5 @@
 import React from 'react';
-import {createElement} from './utils.js';
+import {formatPluralMessage} from './utils.js';
 import './styles.css';
 
 /**
@@ -10,6 +10,17 @@ import './styles.css';
 function App({store}) {
 
   const list = store.getState().list;
+  /**
+   * Обрабатывает удаление элемента.
+   *
+   * @param {React.MouseEvent} e - Событие клика.
+   * @param {number} id - item.code - уникальный идентификатор удаляемого элемента.
+   * @returns {void}
+   */
+  const handleDelete = (e, id) => {
+    e.stopPropagation(e.target)
+    store.deleteItem(id)
+  }
 
   return (
     <div className='App'>
@@ -29,10 +40,10 @@ function App({store}) {
                 <div className='Item-title'>
                    {item.title}
                    {/* Добавляем отображение параметра item.selectionCount */}
-                   {item.selectionCount > 0 ?`| Выделяли ${item.selectionCount} раз`: '' }
+                   {item.selectionCount > 0 ?`| Выделяли ${formatPluralMessage(item.selectionCount, 'раз', 'раза', 'раз')}`: '' }
                 </div>
                 <div className='Item-actions'>
-                  <button onClick={() => store.deleteItem(item.code)}>
+                  <button onClick={(e) => handleDelete(e, item.code)}>
                     Удалить
                   </button>
                 </div>
