@@ -50,3 +50,25 @@ export const generateCode1 = (function (start = 0) {
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
 }
+/**
+ * Функция: formattedAmount
+ * Описание: Форматирует переданное число в строку с валютой (рубли) согласно локации "ru-RU".
+ * @param {number} amount - Число, которое нужно отформатировать.
+ * @returns {string} - Отформатированная строка с валютой.
+ */
+export const formattedAmount = (amount) => new Intl.NumberFormat("ru-RU", {
+  style: "currency",
+  currency: "RUB",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
+}).format(amount);
+
+/**
+ * Функция: totalCost
+ * Описание: Рассчитывает общую стоимость списка товаров, умножая цену каждого товара на его количество и суммируя результаты.
+ * @param {Array} list - Список товаров, каждый элемент которого имеет свойства 'quantity' (количество) и 'price' (цена).
+ * @returns {string} - Общая стоимость в виде отформатированной строки с валютой (рубли).
+ */
+export const totalCost = (list) => {
+  return formattedAmount(list.reduce((acc, curr) => acc + curr.quantity * curr.price, 0))
+}

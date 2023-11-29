@@ -1,8 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
+import Modal from './components/modal';
+
 
 /**
  * Приложение
@@ -10,31 +12,53 @@ import PageLayout from "./components/page-layout";
  * @returns {React.ReactElement}
  */
 function App({store}) {
-
+  const [showModal, setShowModal] = useState(false);
   const list = store.getState().list;
+  const cart = store.getState().cart;
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
+    addToCart: useCallback((item)=> {
+      store.addToCart(item);
     }, [store]),
 
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
+    removeFromCart: useCallback((item)=> {
+      store.removeFromCart(item);
     }, [store]),
 
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store])
+    openCart: () => {
+      setShowModal(true)
+    },
+
+    closeCart: () => {
+      setShowModal(false)
+    }
   }
-
-  return (
+  
+    return (
     <PageLayout>
-      <Head title='Приложение на чистом JS'/>
-      <Controls onAdd={callbacks.onAddItem}/>
+      <Head title='Магазин'/>
+      <Controls cart={cart} action={callbacks.openCart}/>
       <List list={list}
             onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+            onSelectItem={callbacks.onSelectItem}
+            action = {callbacks.addToCart}
+            />
+      {showModal && <Modal
+        onClose={callbacks.closeCart}
+        actionBar={'some actionBar'}
+      >
+        <Head title='Корзина' action={callbacks.closeCart} actionType={'Закрыть'}/>
+        <List list={cart}
+            onDeleteItem={callbacks.onDeleteItem}
+            onSelectItem={callbacks.onSelectItem}
+            action = {callbacks.removeFromCart}
+            btnText={'Удалить'}
+            showTotalCost={true}
+            />
+        
+      </Modal>}     
     </PageLayout>
+    
   );
 }
 
