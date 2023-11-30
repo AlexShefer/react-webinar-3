@@ -28,6 +28,8 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.50);
     background-color: #ffffff;
     z-index: 1001;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .Modal-inner {
@@ -36,9 +38,4 @@
     justify-content: space-between;
     min-height: 400px;
     height: 100%;
-}
-
-.Modal-action-bar {
-    display: flex;
-    justify-content: flex-end;
 }
