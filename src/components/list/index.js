@@ -6,8 +6,8 @@ import './style.css';
 
 function List(props) {
   return (
-    <div className='List'>{
-      props.list.map(item =>
+    <div className='List'>
+      {props.list.map(item =>
         <div key={item.code} className='List-item'>
           <Item item={item} action={props.action} btnText={props.btnText}/>
         </div>
@@ -15,7 +15,7 @@ function List(props) {
       {!props.list.length ? <div className="List-empty">Корзина пуста</div> 
         : props.showTotalCost  &&
             <div className="List-total-cost">
-              <div className="List-total-cost-title">{'Итого:'}</div>
+              <div className="List-total-cost-title">{'Итого'}</div>
               <div>{formattedAmount(props.totalCost)}</div>
             </div>
       }

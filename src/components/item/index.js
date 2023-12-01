@@ -21,7 +21,7 @@ function Item(props) {
         {props.item.title}
       </div>
       <div className='Item-price'>
-          <div className='Item-price'>{formattedAmount(props.item.price)} </div>
+          <div>{formattedAmount(props.item.price)} </div>
           {props.item.quantity && 
           <div className="Item-price-quantity">{props.item.quantity} шт</div>}
       </div>

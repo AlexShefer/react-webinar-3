@@ -4,6 +4,7 @@ import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Modal from './components/modal';
+import CartContent from './components/cart-content'
 
 
 /**
@@ -54,16 +55,17 @@ function App({store}) {
         actionBar={'some actionBar'}
       >
         <Head title='Корзина' action={callbacks.closeCart} actionType={'Закрыть'}/>
-        <List list={cart}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}
-            action = {callbacks.removeFromCart}
-            btnText={'Удалить'}
-            showTotalCost={true}
-            itemsInCart={itemsInCart}
-            totalCost={totalCost}
-            />
-        
+        <CartContent>
+          <List list={cart}
+              onDeleteItem={callbacks.onDeleteItem}
+              onSelectItem={callbacks.onSelectItem}
+              action = {callbacks.removeFromCart}
+              btnText={'Удалить'}
+              showTotalCost={true}
+              itemsInCart={itemsInCart}
+              totalCost={totalCost}
+              />
+        </CartContent>
       </Modal>}     
     </PageLayout>
     

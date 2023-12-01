@@ -1,18 +1,17 @@
 .Item {
-  display: grid;
-  grid-template-columns: 5% auto 40% 10% ;
+  display: flex;
+  align-items: center;
   transition: background-color 1s;
+  line-height: 1.375;
 }
 
 .Item-code {
-  padding: 20px 10px 20px 20px;
+  padding: 20px 10px 21px 20px;
 }
 
 .Item-title {
   width: 100%;
-  padding: 20px 10px;
-  display: flex;
-  justify-content: space-between;
+  padding: 20px 10px 21px;
 }
 
 .Item-price{
@@ -20,12 +19,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 10px;
   gap: 60px
+}
+.Item-price-quantity{
+  white-space: nowrap;
 }
 
 .Item-actions {
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px 20px 20px 14px;
+  padding: 20px 20px 20px 24px;
 }
