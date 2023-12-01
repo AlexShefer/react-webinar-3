@@ -15,14 +15,16 @@ function App({store}) {
   const [showModal, setShowModal] = useState(false);
   const list = store.getState().list;
   const cart = store.getState().cart;
+  const itemsInCart = store.getState().itemsInCart;
+  const totalCost = store.getState().totalCost;
 
   const callbacks = {
-    addToCart: useCallback((item)=> {
-      store.addToCart(item);
+    addToCart: useCallback((code)=> {
+      store.addToCart(code);
     }, [store]),
 
-    removeFromCart: useCallback((item)=> {
-      store.removeFromCart(item);
+    removeFromCart: useCallback((code)=> {
+      store.removeFromCart(code);
     }, [store]),
 
     openCart: () => {
@@ -33,11 +35,15 @@ function App({store}) {
       setShowModal(false)
     }
   }
-  
     return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls cart={cart} action={callbacks.openCart}/>
+      <Controls
+            cart={cart}
+            action={callbacks.openCart}
+            itemsInCart={itemsInCart}
+            totalCost={totalCost}
+            />
       <List list={list}
             onDeleteItem={callbacks.onDeleteItem}
             onSelectItem={callbacks.onSelectItem}
@@ -54,6 +60,8 @@ function App({store}) {
             action = {callbacks.removeFromCart}
             btnText={'Удалить'}
             showTotalCost={true}
+            itemsInCart={itemsInCart}
+            totalCost={totalCost}
             />
         
       </Modal>}     

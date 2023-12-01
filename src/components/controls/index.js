@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
-import { plural, totalCost } from "../../utils";
+import { plural, formattedAmount } from "../../utils";
 import './style.css';
 
-function Controls({action, cart}) {
+function Controls(props) {
   
   const cn = bem('Controls');
 
@@ -13,12 +13,12 @@ function Controls({action, cart}) {
       <div className={cn("cart")}>
         В корзине: {' '}
         <span className={cn("cart-content")}>
-          {cart.length ? `${cart.length} ${plural(cart.length, {one: 'товар', few: 'товара', many: 'товаров'})} / ${totalCost(cart)}` : "пусто" }
+          {props.itemsInCart > 0 ? `${props.itemsInCart} ${plural(props.itemsInCart, {one: 'товар', few: 'товара', many: 'товаров'})} / ${formattedAmount(props.totalCost)}` : "пусто" }
         </span>
          
       </div>
       <div className={cn("actions")}>
-      <button onClick={() => action()}>Показать</button>
+      <button onClick={() => props.action()}>Показать</button>
       </div>
         
       
@@ -28,6 +28,8 @@ function Controls({action, cart}) {
 
 Controls.propTypes = {
   action: PropTypes.func.isRequired,
+  totalCost: PropTypes.number.isRequired,
+  itemsInCart: PropTypes.number.isRequired,
 };
 
 Controls.defaultProps = {

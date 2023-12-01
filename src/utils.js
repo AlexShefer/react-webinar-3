@@ -62,13 +62,3 @@ export const formattedAmount = (amount) => new Intl.NumberFormat("ru-RU", {
   minimumFractionDigits: 0,
   maximumFractionDigits: 0,
 }).format(amount);
-
-/**
- * Функция: totalCost
- * Описание: Рассчитывает общую стоимость списка товаров, умножая цену каждого товара на его количество и суммируя результаты.
- * @param {Array} list - Список товаров, каждый элемент которого имеет свойства 'quantity' (количество) и 'price' (цена).
- * @returns {string} - Общая стоимость в виде отформатированной строки с валютой (рубли).
- */
-export const totalCost = (list) => {
-  return formattedAmount(list.reduce((acc, curr) => acc + curr.quantity * curr.price, 0))
-}

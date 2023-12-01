@@ -5,12 +5,10 @@ import './style.css';
 
 function Item(props) {
 
-  // Счётчик выделений
-  const [count, setCount] = useState(0);
 
   const callbacks = {
     btnAction: (e) => {
-      props.action(props.item);
+      props.action(props.item.code);
 
     },
   }
