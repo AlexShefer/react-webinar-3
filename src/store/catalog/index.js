@@ -10,17 +10,46 @@ class Catalog extends StoreModule {
 
   initState() {
     return {
-      list: []
+      list: [],
+      count: 0,
+      currentPage: 5,
+      itemsPerPage: 10,
+      loading: false
     }
   }
 
-  async load() {
-    const response = await fetch('/api/v1/articles');
-    const json = await response.json();
+  setCurrentPage(page){
     this.setState({
       ...this.getState(),
-      list: json.result.items
+      currentPage: page
+    })
+  }
+
+  async load( ) {
+    try {
+      this.setState({
+        ...this.getState(),
+        loading: true, // 
+      })
+      
+      const {itemsPerPage, currentPage} =  this.getState()
+      const skip = (currentPage - 1) * itemsPerPage
+      const response = await fetch(`/api/v1/articles?lang=ru&limit=${itemsPerPage}&skip=${skip}&fields=items(_id,%20title,%20price),count`);
+      const json = await response.json();
+      this.setState({
+      ...this.getState(),
+      list: json.result.items,
+      count: json.result.count
     }, 'Загружены товары из АПИ');
+    } catch(err) {
+      console.error("Error loading data:", err);
+    } finally {
+      this.setState({
+        ...this.getState(),
+        loading: false, // 
+      })
+    }
+    
   }
 }
 
