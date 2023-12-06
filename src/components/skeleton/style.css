@@ -1,0 +1,35 @@
+.skeleton_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Skeleton-box {
+  position: relative;
+  overflow: hidden;
+  background-color: #e0e0e0; 
+  border-radius: 4px;
+  margin-bottom: 2px; 
+}
+
+.Skeleton-shimmer {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+      to right,
+      #e0e0e0 0%,
+      #f0f0f0 50%,
+      #e0e0e0 100%
+  ); /* Shimmer effect */
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite; 
+}
+
+@keyframes loading {
+  0% {
+      transform: translateX(-100%);
+  }
+  100% {
+      transform: translateX(100%);
+  }
+}

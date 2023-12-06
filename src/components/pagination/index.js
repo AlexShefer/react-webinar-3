@@ -16,11 +16,6 @@ function Pagination(props){
   // pageSize: 10
   // siblingCount: 1
   // totalCount: 542
-  console.log('totalCount', totalCount);
-  console.log('siblingCount', siblingCount);
-  console.log('currentPage', currentPage);
-  console.log('pageSize', pageSize);
-  
   const cn = bem('Pagination');
 
 
