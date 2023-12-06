@@ -22,12 +22,12 @@ function Main() {
     currentPage: state.catalog.currentPage,
     count: state.catalog.count,
     itemsPerPage: state.catalog.itemsPerPage,
+    totalPages: state.catalog.totalPages,
     loading: state.catalog.loading,
     currentLanguage: state.language.currentLanguage
 
   }));
   
-
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
@@ -66,12 +66,13 @@ function Main() {
         ? <List list={select?.list} renderItem={renders.item}/>
         : <Skeleton times={select.itemsPerPage}
                     width='100%'
-                    height='58px'/>}
+                    height='61px'/>}
       <Pagination
         totalCount={select?.count}
         currentPage={parseInt(select.currentPage)}
         siblingCount={1}
         pageSize={select.itemsPerPage}
+        totalPages={select.totalPages}
       /> 
     </PageLayout>
 

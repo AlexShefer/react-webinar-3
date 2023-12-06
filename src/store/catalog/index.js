@@ -14,7 +14,8 @@ class Catalog extends StoreModule {
       count: 0,
       currentPage: 5,
       itemsPerPage: 10,
-      loading: false
+      loading: false,
+      totalPages: 1
     }
   }
 
@@ -36,10 +37,12 @@ class Catalog extends StoreModule {
       const skip = (currentPage - 1) * itemsPerPage
       const response = await fetch(`/api/v1/articles?lang=en&limit=${itemsPerPage}&skip=${skip}&fields=items(_id,%20title,%20price),count`);
       const json = await response.json();
+      const totalPages = Math.ceil(json.result.count / itemsPerPage);
       this.setState({
       ...this.getState(),
       list: json.result.items,
-      count: json.result.count
+      count: json.result.count,
+      totalPages: totalPages
     }, 'Загружены товары из АПИ');
     } catch(err) {
       console.error("Error loading data:", err);
