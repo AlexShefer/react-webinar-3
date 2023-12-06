@@ -1,0 +1,33 @@
+.ProductDescription{
+  padding: 20px 40px;
+  font-family: Arial;
+  font-size: 18px;
+}
+.ProductDescription-description{
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+.ProductDescription-parameters{
+  list-style: none;
+  padding-left: 0;
+
+}
+.ProductDescription-parameters-title{
+  margin-bottom: 20px;
+  
+
+}
+.ProductDescription-parameters-value{
+  margin-left: 0.5em;
+  font-weight: 700;
+}
+.ProductDescription-price{
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 20px;
+
+}
+.ProductDescription-action{
+
+}
+

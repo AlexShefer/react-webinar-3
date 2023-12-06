@@ -13,11 +13,6 @@ import Skeleton from '../../components/skeleton';
 function Main() {
   const store = useStore();
   const {page = 1} = useParams()
-  console.log('page', page);
-
-  // useEffect(() => {
-  //   store.actions.catalog.load();
-  // }, [page]);
 
   const select = useSelector(state => ({
     list: state.catalog?.list,
@@ -27,7 +22,6 @@ function Main() {
     count: state.catalog.count,
     itemsPerPage: state.catalog.itemsPerPage,
     loading: state.catalog.loading
-
 
   }));
   
@@ -40,7 +34,6 @@ function Main() {
     // Изменения currentPage
     setCurrentPage: useCallback((page) => {
         if (page) {
-          console.log(typeof page);
           store.actions.catalog.setCurrentPage(page);
         } 
         
