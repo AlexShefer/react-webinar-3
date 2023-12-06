@@ -11,11 +11,7 @@ function Pagination(props){
     currentPage,
     pageSize,
   } = props;
-  // MockProps
-  // currentPage: 1
-  // pageSize: 10
-  // siblingCount: 1
-  // totalCount: 542
+  
   const cn = bem('Pagination');
 
 
@@ -131,4 +127,12 @@ function Pagination(props){
     </div>
   )
 }
+
+Pagination.propTypes = {
+  totalCount: PropTypes.number.isRequired,
+  siblingCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+};
+
 export default memo(Pagination)

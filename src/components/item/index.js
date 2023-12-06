@@ -35,6 +35,7 @@ Item.propTypes = {
     price: PropTypes.number
   }).isRequired,
   onAdd: PropTypes.func,
+  currentLanguage: PropTypes.string.isRequired,
 };
 
 Item.defaultProps = {

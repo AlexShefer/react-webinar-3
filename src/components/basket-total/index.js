@@ -17,8 +17,9 @@ function BasketTotal({sum, currentLanguage}) {
 }
 
 BasketTotal.propTypes = {
-  sum: PropTypes.number
-};
+  sum: PropTypes.number,
+  currentLanguage: PropTypes.string.isRequired
+}
 
 BasketTotal.defaultProps = {
   sum: 0

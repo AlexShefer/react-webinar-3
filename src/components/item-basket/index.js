@@ -38,6 +38,8 @@ ItemBasket.propTypes = {
     amount: PropTypes.number
   }).isRequired,
   onRemove: propTypes.func,
+  currentLanguage: PropTypes.string.isRequired,
+  
 }
 
 ItemBasket.defaultProps = {

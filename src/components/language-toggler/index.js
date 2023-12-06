@@ -3,7 +3,7 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import './style.css';
 
-function LanguageToggler(props) {
+function LanguageToggler() {
 
   const store = useStore()
 

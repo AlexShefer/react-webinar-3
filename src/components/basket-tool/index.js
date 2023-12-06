@@ -28,7 +28,8 @@ function BasketTool({sum, amount, onOpen, currentLanguage}) {
 BasketTool.propTypes = {
   onOpen: PropTypes.func.isRequired,
   sum: PropTypes.number,
-  amount: PropTypes.number
+  amount: PropTypes.number,
+  currentLanguage: PropTypes.string.isRequired,
 };
 
 BasketTool.defaultProps = {

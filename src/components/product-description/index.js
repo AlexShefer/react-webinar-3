@@ -7,9 +7,8 @@ import './style.css';
 import Skeleton from "../skeleton";
 
 function ProductDescription(props) {
-  const cn = bem('ProductDescription');
 
-  
+  const cn = bem('ProductDescription');
 
   return (
     <div className={cn()}>
@@ -36,5 +35,30 @@ function ProductDescription(props) {
     </div>
   );
 }
+
+ProductDescription.propTypes = {
+  loading: PropTypes.bool,
+  description: PropTypes.string,
+  madeIn: PropTypes.shape({
+    title: PropTypes.string,
+  }),
+  category: PropTypes.shape({
+    title: PropTypes.string,
+  }),
+  edition: PropTypes.number,
+  price: PropTypes.number,
+  currentLanguage: PropTypes.string.isRequired,
+  addBtn: PropTypes.node,
+};
+
+ProductDescription.defaultProps = {
+  loading: false,
+  description: "",
+  madeIn: {},
+  category: {},
+  edition: 0,
+  price: 0,
+  addBtn: null,
+};
 
 export default memo(ProductDescription);

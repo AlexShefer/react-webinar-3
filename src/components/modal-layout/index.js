@@ -47,6 +47,7 @@ ModalLayout.propTypes = {
   title: PropTypes.string,
   onClose: PropTypes.func,
   children: PropTypes.node,
+  currentLanguage: PropTypes.string.isRequired,
 };
 
 ModalLayout.defaultProps = {

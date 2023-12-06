@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './style.css';
 
 /**
@@ -29,5 +30,12 @@ function Skeleton({ times, width, height }) {
 
     return <div className='Skeleton-container'>{boxes}</div>;
 }
+
+Skeleton.propTypes = {
+  times: PropTypes.number.isRequired,
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+};
+
 
 export default Skeleton;
