@@ -11,8 +11,14 @@
 }
 
 .ItemBasket-title {
+  font-family: Arial;
   width: 100%;
   padding: 20px 10px;
+  text-decoration: none;
+  color: #000
+}
+.ItemBasket-title:hover {
+  text-decoration: underline;
 }
 
 .ItemBasket-right {
