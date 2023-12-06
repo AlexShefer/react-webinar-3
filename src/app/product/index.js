@@ -12,8 +12,6 @@ function Product() {
   const store = useStore();
   const { productId } = useParams()
 
-  console.log(store);
-
   const select = useSelector(state => ({
     amount: state.basket.amount,
     sum: state.basket.sum,
@@ -24,7 +22,8 @@ function Product() {
     price: state.product.price,
     edition: state.product.edition,
     category: state.product.category,
-    loading: state.product.loading
+    loading: state.product.loading,
+    currentLanguage: state.language.currentLanguage
   }));
   
 	const callbacks = {
@@ -49,15 +48,16 @@ function Product() {
     store.actions.product.loadProduct();
   }, [productId]);
   
-  console.log(select.madeIn?.title);
-
   return (
     <PageLayout>
       <Head title={select.title}/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
+      <BasketTool onOpen={callbacks.openModalBasket}
+                  currentLanguage={select.currentLanguage} 
+                  amount={select.amount}
                   sum={select.sum}/>
       
       <ProductDescription
+        currentLanguage={select.currentLanguage}
         loading={select.loading}
         productId={productId}
         description={select.description}

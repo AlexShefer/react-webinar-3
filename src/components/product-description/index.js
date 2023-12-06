@@ -2,11 +2,11 @@ import {memo} from "react";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import { numberFormat } from "../../utils";
+import languages from '../../languages.json'
 import './style.css';
 import Skeleton from "../skeleton";
 
 function ProductDescription(props) {
-  console.log(props);
   const cn = bem('ProductDescription');
 
   
@@ -18,17 +18,17 @@ function ProductDescription(props) {
       <>
       <p className={cn('description')}>{props.description}</p>
       <ul className={cn('parameters')}>
-        <li className={cn('parameters-title')}>Страна производитель
+        <li className={cn('parameters-title')}>{languages.country[props.currentLanguage]}
           <span className={cn('parameters-value')}>{props.madeIn?.title}</span>
         </li>
-        <li className={cn('parameters-title')}>Категория:
+        <li className={cn('parameters-title')}>{languages.category[props.currentLanguage]}:
           <span className={cn('parameters-value')}>{props.category?.title}</span>
         </li>
-        <li className={cn('parameters-title')}>Год выпуска: 
+        <li className={cn('parameters-title')}>{languages.year  [props.currentLanguage]}: 
           <span className={cn('parameters-value')}>{props.edition}</span>
         </li>
       </ul>
-      <p className={cn('price')}>Цена: {numberFormat(props.price, 'ru-Ru', {style: "currency", currency: "RUB"})}</p>
+      <p className={cn('price')}>{languages.price[props.currentLanguage]}: {numberFormat(props.price, 'ru-Ru', {style: "currency", currency: "RUB"})}</p>
       {props.addBtn}
       </>
       : <Skeleton times={6} width="45%" height="40px" />

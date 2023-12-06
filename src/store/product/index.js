@@ -20,11 +20,9 @@ class Product extends StoreModule {
   }
 
   async loadProduct() {
-		console.log('loading');
 		const productId = this.getState().productId
 		
     try {
-			console.log('start');
       this.setState({
         ...this.getState(),
         loading: true, // 
@@ -38,7 +36,6 @@ class Product extends StoreModule {
     } catch(err) {
       console.error("Error loading data:", err);
     } finally {
-			console.log('finish');
       this.setState({
         ...this.getState(),
         loading: false, // 

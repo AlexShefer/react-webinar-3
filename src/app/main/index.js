@@ -9,6 +9,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
 import Skeleton from '../../components/skeleton';
+import langues from '../../languages.json'
 
 function Main() {
   const store = useStore();
@@ -21,7 +22,8 @@ function Main() {
     currentPage: state.catalog.currentPage,
     count: state.catalog.count,
     itemsPerPage: state.catalog.itemsPerPage,
-    loading: state.catalog.loading
+    loading: state.catalog.loading,
+    currentLanguage: state.language.currentLanguage
 
   }));
   
@@ -49,15 +51,17 @@ function Main() {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
+      return <Item currentLanguage={select.currentLanguage}item={item} onAdd={callbacks.addToBasket}/>
     }, [callbacks.addToBasket]),
   };
 
   return (
     <PageLayout>
-      <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
+      <Head title={langues.title[select.currentLanguage]}/>
+      <BasketTool onOpen={callbacks.openModalBasket}
+                  amount={select.amount}
+                  sum={select.sum}
+                  currentLanguage={select.currentLanguage}/>
       {!select.loading 
         ? <List list={select?.list} renderItem={renders.item}/>
         : <Skeleton times={select.itemsPerPage}

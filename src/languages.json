@@ -1,0 +1,67 @@
+{
+    "title": {
+        "ru": "Магазин",
+        "en": "Shop"
+    },
+    "home": {
+        "ru": "Главная",
+        "en": "Home"
+    },
+    "cart": {
+        "ru": "Перейти",
+        "en": "Cart"
+    },
+    "inTheCart" : {
+        "ru": "В корзине:",
+        "en": "In the cart:"
+    },
+    "empty": {
+        "ru": "пусто",
+        "en": "is empty"
+    },
+    "pluralProducts": {
+        "ru": { "one": "товар", "few": "товара", "many": "товаров" },
+        "en": { "one": "product", "few": "products", "many": "products" }
+    },
+    "goToCart": {
+        "ru": "Перейти",
+        "en": "To cart"
+    },
+    "addToCart": {
+        "ru": "Добавить",
+        "en": "Add"
+    },
+    "basketHeading" : {
+        "ru": "Корзина",
+        "en": "Cart"
+    },
+    "removeFromBasketBtn": {
+        "ru": "Удалить",
+        "en": "Remove"
+    },
+    "cartTotal": {
+        "ru": "Итого",
+        "en": "Total"
+    },
+    
+    "close": {
+        "ru": "Закрыть",
+        "en": "Close"
+    },
+    "country": {
+        "ru": "Страна производитель",
+        "en": "Country of origin"
+    },
+    "category": {
+        "ru": "Категория",
+        "en": "Category"
+    },
+    "price": {
+        "ru": "Цена",
+        "en": "Price"
+    },
+    "year": {
+        "ru": "Год выпуска",
+        "en": "Released in"
+    }
+}
