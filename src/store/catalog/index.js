@@ -34,7 +34,7 @@ class Catalog extends StoreModule {
       
       const {itemsPerPage, currentPage} =  this.getState()
       const skip = (currentPage - 1) * itemsPerPage
-      const response = await fetch(`/api/v1/articles?lang=ru&limit=${itemsPerPage}&skip=${skip}&fields=items(_id,%20title,%20price),count`);
+      const response = await fetch(`/api/v1/articles?lang=en&limit=${itemsPerPage}&skip=${skip}&fields=items(_id,%20title,%20price),count`);
       const json = await response.json();
       this.setState({
       ...this.getState(),
