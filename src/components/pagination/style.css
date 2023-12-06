@@ -11,26 +11,36 @@
     text-align: center;
     margin: 0;
     padding: 0 3px;
+    text-decoration: none;
 }
+
 
 .Pagination-item,
 .Pagination-item_active {
-    border: none;
+    padding: 1px 6px;
     font-size: 16px;
     cursor: pointer;
     font-family: Arial, sans-serif;
 
 }
-
-.Pagination-item:hover {
-    background: #E1E1E1;
-
-}
-
 .Pagination-item {
     background: #FFF;
 }
+
+.Pagination-item:hover {
+    background: #E1E1E1;
+}
+
 .Pagination-item_active {
     background: #0087E9;
     color: #FFF;
+}
+.Pagination-item_active
+.Pagination-link {
+    color: #FFF;
+}
+
+.Pagination-link {
+    text-decoration: none;
+    color: #000;
 }

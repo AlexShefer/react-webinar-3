@@ -1,4 +1,5 @@
-import {memo, useMemo} from "react";
+import {memo} from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
@@ -15,6 +16,11 @@ function Pagination(props){
   // pageSize: 10
   // siblingCount: 1
   // totalCount: 542
+  console.log('totalCount', totalCount);
+  console.log('siblingCount', siblingCount);
+  console.log('currentPage', currentPage);
+  console.log('pageSize', pageSize);
+  
   const cn = bem('Pagination');
 
 
@@ -85,7 +91,7 @@ function Pagination(props){
     */
     if (shouldShowLeftDots && !shouldShowRightDots) {
       
-      let rightItemCount = Math.max(totalPageCount - currentPage, 2) + siblingCount;
+      let rightItemCount = Math.max(totalPageCount - currentPage + 1, 2) + siblingCount;
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
         totalPageCount
@@ -103,26 +109,26 @@ function Pagination(props){
   }
   const paginatorEl = paginationRage()
 
-  const callback = {
-    handleClick: (index)=> {
-      console.log(index);
-    }
-  }
 
   return(
     <div className={cn()}>
-      {paginatorEl.map(el => {
+      {paginatorEl.map((el, index) => {
         if (el === '...'){
-          return <p className={cn('dots')}>...</p>
+          return <div key={index} className={cn('dots')}>...</div>
         } else {
           
           return (
-            <button 
-              className={cn('item' + (el === currentPage ? '_active' : ''))}
-              onClick={()=>callback.handleClick(el)}
-              disabled={el === currentPage}>
+            <div 
+              key={index}
+              className={cn('item' + (el === currentPage ? '_active' : ''))}>
+              <Link
+                to={`/catalog/${el}`} 
+                className={cn('link')}
+                onClick={()=>callback.handleClick(el)}
+              >
                 {el}
-            </button>
+              </Link>
+            </div>
           )
         }
       })}
@@ -130,4 +136,4 @@ function Pagination(props){
     </div>
   )
 }
-export default Pagination
+export default memo(Pagination)
