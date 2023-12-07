@@ -52,7 +52,7 @@ function Main() {
   const renders = {
     item: useCallback((item) => {
       return <Item currentLanguage={select.currentLanguage}item={item} onAdd={callbacks.addToBasket}/>
-    }, [callbacks.addToBasket]),
+    }, [callbacks.addToBasket, select.currentLanguage]),
   };
 
   return (

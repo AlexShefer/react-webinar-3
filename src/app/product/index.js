@@ -7,6 +7,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Skeleton from '../../components/skeleton';
 import ProductDescription from '../../components/product-description';
+import languages from '../../languages.json'
 
 function Product() {
   const store = useStore();
@@ -66,7 +67,7 @@ function Product() {
         category={select.category}
         edition={select.edition}
         addBtn={
-          <button onClick={() => callbacks.addToBasket(productId)}>добавить</button>
+          <button onClick={() => callbacks.addToBasket(productId)}>{languages.addToCart[select.currentLanguage]}</button>
         }
       />
       
