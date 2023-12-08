@@ -37,6 +37,10 @@ function Product() {
         store.actions.product.setProductId(id);
       } 
   },[productId]),
+
+    setCurrentLanguage: useCallback(() => {
+      store.actions.language.setCurrentLanguage(select.currentLanguage)
+      }, [select.currentLanguage])
   }
 
   
