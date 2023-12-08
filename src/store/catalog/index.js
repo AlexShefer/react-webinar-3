@@ -23,7 +23,7 @@ class Catalog extends StoreModule {
     this.setState({
       ...this.getState(),
       currentPage: page
-    })
+    }, "Обновление номера страницы")
   }
 
   async load( ) {
@@ -31,7 +31,7 @@ class Catalog extends StoreModule {
       this.setState({
         ...this.getState(),
         loading: true, // 
-      })
+      }, "Catalog is loading = true")
       
       const {itemsPerPage, currentPage} =  this.getState()
       const skip = (currentPage - 1) * itemsPerPage
@@ -50,7 +50,7 @@ class Catalog extends StoreModule {
       this.setState({
         ...this.getState(),
         loading: false, // 
-      })
+      }, "Catalog is loading = false")
     }
     
   }

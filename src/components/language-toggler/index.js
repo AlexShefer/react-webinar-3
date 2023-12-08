@@ -1,25 +1,20 @@
-import {memo, useCallback} from 'react';
-import useStore from '../../store/use-store';
-import useSelector from '../../store/use-selector';
+import {memo} from 'react';
+import PropTypes from 'prop-types'; 
 import './style.css';
 
-function LanguageToggler() {
-
-  const store = useStore()
-
-  const currentLanguage = useSelector((state)=> state.language.currentLanguage)
-  const language = useSelector((state)=> state.language)
-
-  const callbacks = {
-    changeLanguage: useCallback(() => store.actions.language.setCurrentLanguage(language.currentLanguage), [store, language.currentLanguage]),
-  };
+function LanguageToggler(props) {
 
   return (
     <div className='LanguageToggler'>
-      <button onClick={callbacks.changeLanguage}>{currentLanguage === 'ru' ? "EN 🌐" : "RU 🌐"}</button>
+      <button onClick={props.onChangeLanguage}>{props.currentLanguage === 'ru' ? "EN 🌐" : "RU 🌐"}</button>
     </div>
   )
 }
+
+LanguageToggler.propTypes = {
+  onChangeLanguage: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string.isRequired,
+};
 
 
 export default memo(LanguageToggler);

@@ -1,4 +1,4 @@
-import {memo, useMemo} from "react";
+import {memo} from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { usePagination } from "../use-pagination";
@@ -50,7 +50,6 @@ function Pagination(props){
               <Link
                 to={`/catalog/${el}`} 
                 className={cn('link')}
-                onClick={()=>callback.handleClick(el)}
               >
                 {el}
               </Link>

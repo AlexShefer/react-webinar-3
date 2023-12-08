@@ -16,7 +16,7 @@ class Language extends StoreModule {
     this.setState({
       ...this.getState(),
       currentLanguage: language === 'ru' ? 'en' : 'ru'
-    })
+    }, 'Смена языка')
   }
 
 }

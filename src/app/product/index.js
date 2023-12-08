@@ -1,13 +1,10 @@
 import {memo, useCallback, useEffect,} from 'react';
 import { useParams } from 'react-router-dom';
-import PageLayout from "../../components/page-layout";
-import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import Skeleton from '../../components/skeleton';
 import ProductDescription from '../../components/product-description';
 import languages from '../../languages.json'
+import MainLayout from '../../components/main-layout/index'
 
 function Product() {
   const store = useStore();
@@ -44,19 +41,19 @@ function Product() {
 
   
   useEffect(() => {
-    callbacks.closeModal()
     callbacks.setProductId(productId);
     store.actions.product.loadProduct();
   }, [productId]);
   
   return (
-    <PageLayout>
-      <Head title={select.title}/>
-      <BasketTool onOpen={callbacks.openModalBasket}
-                  currentLanguage={select.currentLanguage} 
-                  amount={select.amount}
-                  sum={select.sum}/>
-      
+    <MainLayout
+        title={select.title}
+        onOpen={callbacks.openModalBasket}
+        amount={select.amount}
+        sum={select.sum}
+        currentLanguage={select.currentLanguage}
+        onChangeLanguage={callbacks.setCurrentLanguage}
+      >
       <ProductDescription
         currentLanguage={select.currentLanguage}
         loading={select.loading}
@@ -70,8 +67,7 @@ function Product() {
           <button onClick={() => callbacks.addToBasket(productId)}>{languages.addToCart[select.currentLanguage]}</button>
         }
       />
-      
-    </PageLayout>
+    </MainLayout>
 
   );
 }

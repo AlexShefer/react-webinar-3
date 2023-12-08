@@ -4,7 +4,6 @@ import {cn as bem} from '@bem-react/classname';
 import { numberFormat } from "../../utils";
 import languages from '../../languages.json'
 import './style.css';
-import Skeleton from "../skeleton";
 
 function ProductDescription(props) {
 
@@ -12,9 +11,6 @@ function ProductDescription(props) {
 
   return (
     <div className={cn()}>
-      
-      { !props.loading ? 
-      <>
       <p className={cn('description')}>{props.description}</p>
       <ul className={cn('parameters')}>
         <li className={cn('parameters-title')}>{languages.country[props.currentLanguage]}
@@ -29,9 +25,6 @@ function ProductDescription(props) {
       </ul>
       <p className={cn('price')}>{languages.price[props.currentLanguage]}: {numberFormat(props.price, 'ru-Ru', {style: "currency", currency: "RUB"})}</p>
       {props.addBtn}
-      </>
-      : <Skeleton times={6} width="45%" height="40px" />
-    }
     </div>
   );
 }
