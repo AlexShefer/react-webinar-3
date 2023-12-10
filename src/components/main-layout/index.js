@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import PageLayout from "../page-layout";
 import Head from "../head";
 import BasketTool from "../basket-tool";
+import Toolbar from '../tool-bar';
 
 
 function MainLayout(props) {
@@ -14,11 +15,13 @@ function MainLayout(props) {
           onChangeLanguage={props.onChangeLanguage}
           currentLanguage={props.currentLanguage}
           />
-      <BasketTool onOpen={props.onOpen}
-                  amount={props.amount}
-                  sum={props.sum}
-                  currentLanguage={props.currentLanguage}/>
+      <Toolbar 
+              onOpen={props.onOpen}
+              amount={props.amount}
+              sum={props.sum}
+              currentLanguage={props.currentLanguage}/>
       {props.children}
+
     </PageLayout>
 
   );
