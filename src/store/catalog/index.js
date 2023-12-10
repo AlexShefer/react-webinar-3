@@ -26,16 +26,15 @@ class Catalog extends StoreModule {
     }, "Обновление номера страницы")
   }
 
-  async load( ) {
+  async load(language) {
     try {
       this.setState({
         ...this.getState(),
         loading: true, // 
       }, "Catalog is loading = true")
-      
       const {itemsPerPage, currentPage} =  this.getState()
       const skip = (currentPage - 1) * itemsPerPage
-      const response = await fetch(`/api/v1/articles?lang=en&limit=${itemsPerPage}&skip=${skip}&fields=items(_id,%20title,%20price),count`);
+      const response = await fetch(`/api/v1/articles?lang=${language}&limit=${itemsPerPage}&skip=${skip}&fields=items(_id,title,madeIn(title),category(title),description,edition,price),count`);
       const json = await response.json();
       const totalPages = Math.ceil(json.result.count / itemsPerPage);
       this.setState({

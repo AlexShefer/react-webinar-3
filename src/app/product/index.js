@@ -46,8 +46,11 @@ function Product() {
   
   useEffect(() => {
     callbacks.setProductId(productId);
-    store.actions.product.loadProduct();
   }, [productId]);
+
+  useEffect(() => {
+    store.actions.product.loadProduct(select.currentLanguage);
+  }, [productId, select.currentLanguage]);
   
   return (
     <MainLayout

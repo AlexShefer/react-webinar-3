@@ -2,6 +2,7 @@ import {memo} from "react";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import { numberFormat } from "../../utils";
+import Skeleton from '../skeleton'
 import languages from '../../languages.json'
 import './style.css';
 
@@ -11,18 +12,23 @@ function ProductDescription(props) {
 
   return (
     <div className={cn()}>
-      <p className={cn('description')}>{props.description}</p>
-      <ul className={cn('parameters')}>
-        <li className={cn('parameters-title')}>{languages.country[props.currentLanguage]}
-          <span className={cn('parameters-value')}>{props.madeIn?.title}</span>
-        </li>
-        <li className={cn('parameters-title')}>{languages.category[props.currentLanguage]}:
-          <span className={cn('parameters-value')}>{props.category?.title}</span>
-        </li>
-        <li className={cn('parameters-title')}>{languages.year  [props.currentLanguage]}: 
-          <span className={cn('parameters-value')}>{props.edition}</span>
-        </li>
-      </ul>
+      {!props.loading 
+      ? (<>
+          <p className={cn('description')}>{props.description}</p>
+          <ul className={cn('parameters')}>
+            <li className={cn('parameters-title')}>{languages.country[props.currentLanguage]}
+              <span className={cn('parameters-value')}>{props.madeIn?.title}</span>
+            </li>
+            <li className={cn('parameters-title')}>{languages.category[props.currentLanguage]}:
+              <span className={cn('parameters-value')}>{props.category?.title}</span>
+            </li>
+            <li className={cn('parameters-title')}>{languages.year  [props.currentLanguage]}: 
+              <span className={cn('parameters-value')}>{props.edition}</span>
+            </li>
+          </ul>
+      </>) : (
+        <Skeleton times={5} width="45%" height="45px"/>
+      )}
       <p className={cn('price')}>{languages.price[props.currentLanguage]}: {numberFormat(props.price, 'ru-Ru', {style: "currency", currency: "RUB"})}</p>
       {props.addBtn}
     </div>

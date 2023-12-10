@@ -45,8 +45,8 @@ function Main() {
 
     useEffect(() => {
     callbacks.setCurrentPage(page);
-    store.actions.catalog.load();
-  }, [page]);
+    store.actions.catalog.load(select.currentLanguage);
+  }, [page, select.currentLanguage]);
 
   
 
@@ -65,7 +65,9 @@ function Main() {
         currentLanguage={select.currentLanguage}
         onChangeLanguage={callbacks.setCurrentLanguage}
       >
-      <List list={select?.list} renderItem={renders.item}/>
+      {!select.loading 
+        ? <List list={select.list} renderItem={renders.item}/> 
+        : <Skeleton times={10} height='59.4px' width='100%'/> }
       <Pagination
         totalCount={select?.count}
         currentPage={parseInt(select.currentPage)}

@@ -7,7 +7,6 @@ import Toolbar from '../tool-bar';
 
 
 function MainLayout(props) {
-
   return (
     <PageLayout>
       <Head 
@@ -20,21 +19,20 @@ function MainLayout(props) {
               amount={props.amount}
               sum={props.sum}
               currentLanguage={props.currentLanguage}/>
-      {props.children}
-
+              {props.children}
     </PageLayout>
 
   );
 }
 
 MainLayout.propTypes = {
-  title: PropTypes.string.isRequired,
-  onChangeLanguage: PropTypes.func.isRequired,
-  currentLanguage: PropTypes.string.isRequired,
-  onOpen: PropTypes.func.isRequired,
-  amount: PropTypes.number.isRequired,
-  sum: PropTypes.number.isRequired,
-  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  onChangeLanguage: PropTypes.func,
+  currentLanguage: PropTypes.string,
+  onOpen: PropTypes.func,
+  amount: PropTypes.number,
+  sum: PropTypes.number,
+  children: PropTypes.node,
 };
 
 export default memo(MainLayout);
