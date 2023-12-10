@@ -1,14 +1,21 @@
 import {memo} from "react";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
-import { numberFormat } from "../../utils";
+import { numberFormat, getTranslation } from "../../utils";
 import Skeleton from '../skeleton'
-import languages from '../../languages.json'
 import './style.css';
 
 function ProductDescription(props) {
 
   const cn = bem('ProductDescription');
+
+  const translation = {
+    country: getTranslation('country', props.currentLanguage, 'Country'),
+    category: getTranslation('category', props.currentLanguage, 'Category'),
+    year: getTranslation('year', props.currentLanguage, 'Year'),
+    price: getTranslation('price', props.currentLanguage, 'Price'),
+
+  }
 
   return (
     <div className={cn()}>
@@ -16,20 +23,20 @@ function ProductDescription(props) {
       ? (<>
           <p className={cn('description')}>{props.description}</p>
           <ul className={cn('parameters')}>
-            <li className={cn('parameters-title')}>{languages.country[props.currentLanguage]}
+            <li className={cn('parameters-title')}>{translation.country}
               <span className={cn('parameters-value')}>{props.madeIn?.title}</span>
             </li>
-            <li className={cn('parameters-title')}>{languages.category[props.currentLanguage]}:
+            <li className={cn('parameters-title')}>{translation.category}:
               <span className={cn('parameters-value')}>{props.category?.title}</span>
             </li>
-            <li className={cn('parameters-title')}>{languages.year  [props.currentLanguage]}: 
+            <li className={cn('parameters-title')}>{translation.year}: 
               <span className={cn('parameters-value')}>{props.edition}</span>
             </li>
           </ul>
       </>) : (
         <Skeleton times={5} width="45%" height="45px"/>
       )}
-      <p className={cn('price')}>{languages.price[props.currentLanguage]}: {numberFormat(props.price, 'ru-Ru', {style: "currency", currency: "RUB"})}</p>
+      <p className={cn('price')}>{translation.price}: {numberFormat(props.price, 'ru-Ru', {style: "currency", currency: "RUB"})}</p>
       {props.addBtn}
     </div>
   );

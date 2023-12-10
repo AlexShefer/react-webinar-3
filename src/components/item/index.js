@@ -2,8 +2,7 @@ import {memo, useState} from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
-import {numberFormat} from "../../utils";
-import languages from '../../languages.json'
+import {numberFormat, getTranslation} from "../../utils";
 import './style.css';
 
 function Item(props) {
@@ -13,7 +12,9 @@ function Item(props) {
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id)
   }
-  
+  const translation = {
+    addToCart: getTranslation('addToCart', props.currentLanguage, 'addToCart')
+  }
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
@@ -22,7 +23,7 @@ function Item(props) {
       </Link>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>{languages.addToCart[props.currentLanguage]}</button>
+        <button onClick={callbacks.onAdd}>{translation.addToCart}</button>
       </div>
     </div>
   );

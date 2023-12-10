@@ -18,8 +18,14 @@ const Toolbar = (props) => {
           sum={props.sum}
           currentLanguage={props.currentLanguage}/>
     </div>)
-
   
 }
+
+Toolbar.propTypes = {
+  onOpen: PropTypes.func,
+  amount: PropTypes.number,
+  sum: PropTypes.number,
+  currentLanguage: PropTypes.string,
+};
 
 export default Toolbar

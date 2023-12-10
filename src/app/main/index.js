@@ -6,8 +6,8 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
 import Skeleton from '../../components/skeleton';
-import language from '../../languages.json'
 import MainLayout from '../../components/main-layout';
+import { getTranslation } from '../../utils';
 
 function Main() {
   const store = useStore();
@@ -56,9 +56,11 @@ function Main() {
     }, [callbacks.addToBasket, select.currentLanguage]),
   };
 
+  const translatedTitle = getTranslation('title', select.currentLanguage, 'Shop')
+
   return (
     <MainLayout
-        title={language.title[select.currentLanguage]}
+        title={translatedTitle}
         onOpen={callbacks.openModalBasket}
         amount={select.amount}
         sum={select.sum}

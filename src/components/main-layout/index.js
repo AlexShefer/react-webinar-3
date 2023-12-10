@@ -2,7 +2,6 @@ import {memo} from 'react';
 import PropTypes from 'prop-types'; 
 import PageLayout from "../page-layout";
 import Head from "../head";
-import BasketTool from "../basket-tool";
 import Toolbar from '../tool-bar';
 
 

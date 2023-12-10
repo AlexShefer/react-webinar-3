@@ -1,3 +1,5 @@
+import languages from './languages.json'
+
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -32,4 +34,23 @@ export function codeGenerator(start = 0) {
  */
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
+}
+
+/**
+ * Функция: getTranslation
+ * Описание: Получает перевод для указанного значения и языка из предварительно определенных языковых данных. Если перевод не найден, возвращает значение по умолчанию.
+ * @param {string} value - Значение, для которого нужно получить перевод.
+ * @param {string} language - Язык, на который нужно перевести значение.
+ * @param {string} fallback - Значение по умолчанию, возвращаемое в случае отсутствия перевода.
+ * @returns {string} - Возвращает переведенное значение, если оно найдено, в противном случае возвращает значение по умолчанию.
+ */
+export function getTranslation(value, language, fallback) {
+  // Проверка наличия значения и его перевода для указанного языка
+  if (languages[value] && languages[value][language]) {
+    // Возвращение переведенного значения
+    return languages[value][language];
+  }
+  
+  // Возвращение значения по умолчанию в случае отсутствия перевода
+  return fallback;
 }
