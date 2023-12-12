@@ -33,3 +33,83 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+
+/**
+ * Функция: organizeCategories
+ * Описание: Организует категории в иерархическую структуру на основе родительских связей.
+ * @param {Array} categories - Массив объектов категорий для организации.
+ * @returns {Array} - Возвращает массив организованных категорий с учетом иерархии родительских связей.
+ */
+export function organizeCategories(categories) {
+  const categoryMap = new Map();
+
+  // создаем карту индикаторов категорий
+  categories.forEach((category) => {
+      categoryMap.set(category._id, category);
+  });
+
+  const organizedCategories = [];
+
+  // Итерируем по категориям, чтобы построить иерархию
+  categories.forEach((category) => {
+      if (category.parent) {
+          const parentCategory = categoryMap.get(category.parent._id);
+          if (parentCategory) {
+              // Если родительская категория существует, добавляем текущую категорию как субкатегория
+              if (!parentCategory.children) {
+                  parentCategory.children = [];
+              }
+              parentCategory.children.push(category);
+          }
+      } else {
+          // Если у категории нет родительского элемента, это категория верхнего уровня
+          organizedCategories.push(category);
+      }
+  });
+
+  return organizedCategories;
+}
+
+/**
+ * Рекурсивная функция для получения идентификаторов всех дочерних элементов
+ *
+ * @param {Object} category - Категория, для которой нужно получить идентификаторы.
+ * @returns {Array} - Массив идентификаторов всех дочерних элементов
+ */
+const getCategoryIdsRecursive = (category) => {
+  let ids = [category._id];
+  if (category.children) {
+    category.children.forEach((child) => {
+      // Рекурсивно собираем идентификаторы для дочерних 
+      ids = [...ids, ...getCategoryIdsRecursive(child)];
+    });
+  }
+  return ids;
+};
+
+/**
+ * Функция для выравнивания иерархической структуры категорий в плоский список с учетом идентификаторов всех дочерних и поддочерних элементов.
+ *
+ * @param {Array} categories - Массив категорий.
+ * @param {number} depth - Текущий уровень глубины вложенности (используется для визуального представления иерархии).
+ * @returns {Array} - Плоский список категорий с учетом идентификаторов всех дочерних и поддочерних элементов.
+ */
+export const flattenCategoriesWithChildIds = (categories, depth = 0) => {
+  const categoryOptions = [];
+  categories.forEach((category) => {
+    const titlePrefix = Array(depth).fill("-").join(" ");
+    const option = {
+      // Используем getCategoryIdsRecursive для получения всех идентификаторов для категории и ее дочерних элементов
+      value: getCategoryIdsRecursive(category),
+      title: `${titlePrefix} ${category.title}`,
+      parent: category.parent,
+    };
+    categoryOptions.push(option);
+    if (category.children) {
+      // Рекурсивно выравниваем дочерние категории
+      categoryOptions.push(...flattenCategoriesWithChildIds(category.children, depth + 1));
+    }
+  });
+  return categoryOptions;
+};
