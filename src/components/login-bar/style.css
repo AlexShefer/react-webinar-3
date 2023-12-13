@@ -1,0 +1,12 @@
+.LoginBar {
+	padding: 10px 20px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 20px;
+}
+.LoginBar-link {
+	color: #0087e9;
+}
+.LoginBar-btn {
+	color: #0087e9;
+}

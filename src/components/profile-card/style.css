@@ -1,0 +1,11 @@
+.ProfileCard {
+	padding: 20px;
+}
+.ProfileCard-text {
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+.ProfileCard-text_bold {
+	font-weight: 700;
+}
+

@@ -10,6 +10,7 @@ import Navigation from "../../containers/navigation";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
+import LoginBar from '../../components/login-bar';
 
 /**
  * Страница товара с первичной загрузкой товара по id из url адреса
@@ -27,6 +28,7 @@ function Article() {
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
+    username: state.user.username
   }));
 
   const {t} = useTranslate();
@@ -37,7 +39,7 @@ function Article() {
   }
 
   return (
-    <PageLayout>
+    <>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>
@@ -45,7 +47,7 @@ function Article() {
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
       </Spinner>
-    </PageLayout>
+    </>
   );
 }
 
