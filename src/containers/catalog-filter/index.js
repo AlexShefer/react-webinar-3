@@ -22,7 +22,6 @@ function CatalogFilter() {
     category: state.catalog.params.category
   }));
 
-  console.log(select.categories);
   
   const callbacks = {
     // Сортировка
@@ -51,7 +50,6 @@ function CatalogFilter() {
     }, [select.categories]),
     
   };
-  console.log(options.category);
 
   const {t} = useTranslate();
 
