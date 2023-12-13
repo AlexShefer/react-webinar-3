@@ -67,6 +67,7 @@ class UserState extends StoreModule {
 							phone: json.result.profile.phone,
 							email: json.result.email,
 							userProfile: json.result,
+							waiting: false
 						},
 						'Пользователь верифицирован, данные загружены'
 					);
@@ -96,7 +97,7 @@ class UserState extends StoreModule {
 	async login(body) {
 		this.setState(
 			{ ...this.getState(), waiting: true, error: '' },
-			'Проверка данныx авторизации'
+			'Проверка данных авторизации'
 		);
 		try {
 			const response = await fetch('/api/v1/users/sign', {
@@ -113,6 +114,7 @@ class UserState extends StoreModule {
 						...this.getState(),
 						token: json.result.token,
 						username: json.result.user.profile.name,
+						waiting: false
 					},
 					'Данные пользователя загружены'
 				);
@@ -121,19 +123,16 @@ class UserState extends StoreModule {
 				this.setState({
 					...this.getState(),
 					error: json.error.message,
+					waiting: false
 				});
 			}
 		} catch (err) {
 			this.setState({
 				...this.getState(),
 				error: 'Server Error',
+				waiting: false
 			});
-		} finally {
-			this.setState(
-				{ ...this.getState(), waiting: false },
-				'Проверка данных завершена'
-			);
-		}
+		} 
 	}
 }
 

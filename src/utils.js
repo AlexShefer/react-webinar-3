@@ -95,21 +95,54 @@ const getCategoryIdsRecursive = (category) => {
  * @param {number} depth - Текущий уровень глубины вложенности (используется для визуального представления иерархии).
  * @returns {Array} - Плоский список категорий с учетом идентификаторов всех дочерних и поддочерних элементов.
  */
-export const flattenCategoriesWithChildIds = (categories, depth = 0) => {
+export const flattenCategoriesWithChildIds = (categories, depth = 0, parentId = null) => {
   const categoryOptions = [];
+
   categories.forEach((category) => {
     const titlePrefix = Array(depth).fill("-").join(" ");
     const option = {
-      // Используем getCategoryIdsRecursive для получения всех идентификаторов для категории и ее дочерних элементов
+      id: category._id,
       value: getCategoryIdsRecursive(category),
       title: `${titlePrefix} ${category.title}`,
-      parent: category.parent,
+      parent: parentId,
     };
     categoryOptions.push(option);
+
     if (category.children) {
-      // Рекурсивно выравниваем дочерние категории
-      categoryOptions.push(...flattenCategoriesWithChildIds(category.children, depth + 1));
+      
+      categoryOptions.push(...flattenCategoriesWithChildIds(category.children, depth + 1, category._id));
     }
   });
+
+  return categoryOptions;
+};
+
+/**
+ * Функция для выравнивания иерархической структуры категорий в плоский список с учетом идентификаторов только текущего элемента.
+ *
+ * @param {Array} categories - Массив категорий.
+ * @param {number} depth - Текущий уровень глубины вложенности (используется для визуального представления иерархии).
+ * @returns {Array} - Плоский список категорий с учетом идентификаторов только текущего элемента.
+ */
+
+export const flattenCategoriesWithOwnId = (categories, depth = 0, parentId = null) => {
+  const categoryOptions = [];
+
+  categories.forEach((category) => {
+    const titlePrefix = Array(depth).fill("-").join(" ");
+    const option = {
+      id: category._id, // Use the category's _id as the identifier
+      value: [category._id], // Include only the current category's id, not child ids
+      title: `${titlePrefix} ${category.title}`,
+      parent: parentId,
+    };
+    categoryOptions.push(option);
+
+    if (category.children) {
+      
+      categoryOptions.push(...flattenCategoriesWithOwnId(category.children, depth + 1, category._id));
+    }
+  });
+
   return categoryOptions;
 };

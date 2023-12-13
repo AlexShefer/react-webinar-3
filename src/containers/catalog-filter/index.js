@@ -1,5 +1,5 @@
 import {memo, useCallback, useMemo} from "react";
-import {organizeCategories, flattenCategoriesWithChildIds} from '../../utils'
+import {organizeCategories, flattenCategoriesWithChildIds, flattenCategoriesWithOwnId} from '../../utils'
 import useTranslate from "../../hooks/use-translate";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -18,9 +18,11 @@ function CatalogFilter() {
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
-    categories: state.catalog.categories,
+    categories: state.categories.categories,
     category: state.catalog.params.category
   }));
+
+  console.log(select.categories);
   
   const callbacks = {
     // Сортировка
@@ -43,13 +45,13 @@ function CatalogFilter() {
       {value: 'edition', title: 'Древние'},
     ]), []),
     category: useMemo(() => {
-      const allCategory = { value: "", title: "All" };
-      const organizedCategories = organizeCategories(select.categories);
-      const categoryOptions = flattenCategoriesWithChildIds(organizedCategories);
-      return [allCategory, ...categoryOptions];
+      const allCategory = {value: "", title: "All" };
+      
+      return [allCategory, ...select.categories];
     }, [select.categories]),
     
   };
+  console.log(options.category);
 
   const {t} = useTranslate();
 

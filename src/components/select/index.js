@@ -1,5 +1,5 @@
 import {memo} from "react";
-import PropTypes from 'prop-types';
+import PropTypes, { arrayOf } from 'prop-types';
 import './style.css';
 
 function Select(props) {
@@ -10,7 +10,7 @@ function Select(props) {
   return (
     <select className="Select" value={props.value} onChange={onSelect}>
       {props.options.map(item => (
-        <option key={item.value} value={item.value}>{item.title}</option>
+        <option key={item.title} value={item.value}>{item.title}</option>
       ))}
     </select>
   )
@@ -18,7 +18,11 @@ function Select(props) {
 
 Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
+    ]),
     title: PropTypes.string
   })).isRequired,
   value: PropTypes.any,

@@ -16,10 +16,11 @@ import InitialLayout from './initial-lauout';
  */
 function App() {
   const store = useStore()
+  const token = useSelector((state) => state.user.token)
 
   useEffect(() => {
     store.actions.user.isLogged()
-  }, [])
+  }, [token])
   
   
   const activeModal = useSelector(state => state.modals.name);

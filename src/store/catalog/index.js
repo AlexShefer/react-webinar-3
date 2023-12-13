@@ -12,15 +12,13 @@ class CatalogState extends StoreModule {
   initState() {
     return {
       list: [],
-      categories: [],
       params: {
         page: 1,
         limit: 10,
         sort: 'order',
-        category: '',
-        query: ''
+        query: '',
+        category: ''
       },
-
       count: 0,
       waiting: false
     }
@@ -64,6 +62,7 @@ class CatalogState extends StoreModule {
    * @returns {Promise<void>}
    */
   async setParams(newParams = {}, replaceHistory = false) {
+    console.log(newParams);
     const params = {...this.getState().params, ...newParams};
     // Установка новых параметров и признака загрузки
     this.setState({
@@ -91,15 +90,14 @@ class CatalogState extends StoreModule {
     if (params.category) {
       apiParams['search[category]'] = params.category;
     }
-    const categories = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)`)
-    const jsonCategories = await categories.json()
+    
     const response = await fetch(`/api/v1/articles?${new URLSearchParams(apiParams)}`);
     const json = await response.json();
+    
     this.setState({
       ...this.getState(),
       list: json.result.items,
       count: json.result.count,
-      categories: jsonCategories.result.items,
       waiting: false
     }, 'Загружен список товаров из АПИ');
   }
