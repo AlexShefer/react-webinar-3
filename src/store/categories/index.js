@@ -20,9 +20,10 @@ class CategoriesState extends StoreModule {
 		}, 'Категории загружаются');
 		try {
 			const response = await fetch(
-				`/api/v1/categories?fields=_id,title,parent(_id)`
+				`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`
 			);
 			const json = await response.json();
+			console.log(json);
 			const organizedCategories = organizeCategories(json.result.items);
       const categories= flattenCategoriesWithChildIds(organizedCategories);
 			this.setState({
