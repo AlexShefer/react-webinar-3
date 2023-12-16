@@ -14,21 +14,21 @@ function Login() {
 	const location = useLocation()
 
 	const select = useSelector((state) => ({
-		username: state.user.username,
-		token: state.user.token,
-		error: state.user.error,
-		waiting: state.user.waiting,
+		username: state.session.username,
+		token: state.session.token,
+		error: state.session.error,
+		waiting: state.session.waiting,
 	}));
 
 	const callbacks = {
 		onLogin: (body) => {
-			store.actions.user.login(body);
+			store.actions.session.login(body);
 		},
 		isLogged: () => {
-			store.actions.user.isLogged();
+			store.actions.session.isLogged();
 		},
 		onLogout: () => {
-			store.actions.user.logout();
+			store.actions.session.logout();
 		},
 	};
 	return (
@@ -37,7 +37,7 @@ function Login() {
 				<LocaleSelect />
 			</Head>
 			<Navigation />
-			<LoginForm onLogin={callbacks.onLogin} error={select.error} location={location} />
+			<LoginForm onLogin={callbacks.onLogin} error={select.error} token={select.token} location={location} />
 		</>
 	);
 }

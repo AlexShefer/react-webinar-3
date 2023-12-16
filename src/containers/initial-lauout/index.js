@@ -10,13 +10,13 @@ function InitialLayout() {
 	const store = useStore();
 	const location = useLocation()
 	const select = useSelector((store) => ({
-		username: store.user.username,
-		token: store.user.token,
+		username: store.session.username,
+		token: store.session.token,
 		searchParams: store.catalog.params
 	}));
 	const navigate = useNavigate();
 	const callbacks = {
-		onLogout: () => store.actions.user.logout(),
+		onLogout: () => store.actions.session.logout(),
 		goToLogin: () => navigate('/user/login', { state: { location: location.pathname, searchParams: select.searchParams } }),
 	};
 

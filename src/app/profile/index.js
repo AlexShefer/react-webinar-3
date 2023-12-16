@@ -1,4 +1,4 @@
-import PageLayout from '../../components/page-layout';
+import { useEffect } from 'react';
 import Head from '../../components/head';
 import LocaleSelect from '../../containers/locale-select';
 import Navigation from '../../containers/navigation';
@@ -10,13 +10,22 @@ import Spinner from '../../components/spinner';
 
 function Profile() {
 	const { t } = useTranslate();
+
+	const store = useStore()
+
+	
+
 	const select = useSelector((store) => ({
-		username: store.user.username,
-		phone: store.user.phone,
-		email: store.user.email,
-		token: store.user.token,
-		waiting: store.user.waiting,
+		username: store.profile.username,
+		phone: store.profile.phone,
+		email: store.profile.email,
+		token: store.session.token,
+		waiting: store.profile.waiting,
 	}));
+
+	useEffect(() => {
+    store.actions.profile.getProfile(select.token)
+  }, [select.token])
 	
 	return (
 		<>

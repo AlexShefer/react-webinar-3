@@ -26,7 +26,7 @@ function Article() {
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
-    username: state.user.username
+    username: state.profile.username
   }));
 
   const {t} = useTranslate();

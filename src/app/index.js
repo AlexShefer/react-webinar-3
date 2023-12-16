@@ -16,10 +16,10 @@ import InitialLayout from '../containers/initial-lauout';
  */
 function App() {
   const store = useStore()
-  const token = useSelector((state) => state.user.token)
+  const token = useSelector((state) => state.session.token)
 
   useEffect(() => {
-    store.actions.user.isLogged()
+    store.actions.session.isLogged()
   }, [token])
   
   
@@ -30,8 +30,7 @@ function App() {
       <Routes>
         <Route path={''} element={<InitialLayout/>}>
           <Route index element={<Main/>}/>
-          {!token && <Route path={'/user/login'} element={<Login/>}/>}
-          {token && <Route path={'/user/login'} element={<Navigate to="/user/profile" />} />}
+          <Route path={'/user/login'} element={<Login/>}/>
           <Route element={<ProtectedRoutes/>}>
             <Route path={'/user/profile'} element={<Profile/>}/>
           </Route>

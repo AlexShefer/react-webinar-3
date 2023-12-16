@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { objectToQueryString } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
@@ -9,9 +9,9 @@ function LoginForm(props) {
 		login: '',
 		password: '',
 	});
-	const navigate = useNavigate()
-
+	console.log(props);
 	const cn = bem('LoginForm');
+	console.log(props);
 	const callbacks = {
 		onChange: (e) => {
 			setUser((prev) => ({
@@ -22,52 +22,84 @@ function LoginForm(props) {
 		handleSubmitForm: (e) => {
 			e.preventDefault();
 			props.onLogin(user);
-			if (props.location.state.location === "/" || props.location.state.location === "/user/login") {
-				navigate(`/?${objectToQueryString(props.location.state.searchParams)}`)
+		},
+		onRedirect: () => {
+			if (!props.error && props.token) {
+				if (props.location.state && props.location.state.location) {
+					if (
+						props.location.state.location === '/user/login' ||
+						props.location.state.location === '/'
+					) {
+						return (
+							<Navigate
+								to={`/?${objectToQueryString(
+									props.location.state.searchParams
+								)}`}
+							/>
+						);
+					} else {
+						return <Navigate to={props.location.state.location} />;
+					}
+				} else {
+					return <Navigate to={'/'} />;
+				}
 			} else {
-				navigate(props.location.state.location)
+				return null;
 			}
 		},
 	};
+	const option = {
+		redirectionMessage: props.location.state?.message
+			? props.location.state.message
+			: '',
+	};
+	console.log(option.redirectionMessage);
 	return (
-		<div className={cn()}>
-			<h2 className={cn('title')}>Вход</h2>
-			<form className={cn('form')}>
-				<label className={cn('label')} htmlFor="login">
-					Логин
-				</label>
-				<input
-					className={cn('input')}
-					id="login"
-					type="text"
-					name="login"
-					value={user.name}
-					onChange={callbacks.onChange}
-				/>
-				<label className={cn('label')} htmlFor="password">
-					Пароль
-				</label>
-				<input
-					className={cn('input')}
-					id="password"
-					type="password"
-					name="password"
-					value={user.password}
-					onChange={callbacks.onChange}
-				/>
-				{props.error ? (
-					<p className={cn('error')}>{props.error}</p>
-				) : (
-					''
-				)}
-				<button
-					className={cn('button')}
-					onClick={callbacks.handleSubmitForm}
-				>
-					Войти
-				</button>
-			</form>
-		</div>
+		<>
+			{callbacks.onRedirect()}
+			<div className={cn()}>
+				<h2 className={cn('title')}>Вход</h2>
+				<form className={cn('form')}>
+					<label className={cn('label')} htmlFor="login">
+						Логин
+					</label>
+					<input
+						className={cn('input')}
+						id="login"
+						type="text"
+						name="login"
+						value={user.name}
+						onChange={callbacks.onChange}
+					/>
+					<label className={cn('label')} htmlFor="password">
+						Пароль
+					</label>
+					<input
+						className={cn('input')}
+						id="password"
+						type="password"
+						name="password"
+						value={user.password}
+						onChange={callbacks.onChange}
+					/>
+					{props.error ? (
+						<p className={cn('error')}>{props.error}</p>
+					) : option.redirectionMessage ? (
+						<p className={cn('error')}>
+							{option.redirectionMessage}
+						</p>
+					) : (
+						''
+					)}
+					<button
+						className={cn('button')}
+						onClick={callbacks.handleSubmitForm}
+					>
+						Войти
+					</button>
+				</form>
+			</div>
+		</>
 	);
 }
 

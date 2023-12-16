@@ -1,14 +1,12 @@
 import StoreModule from '../module';
 
-class UserState extends StoreModule {
+class SessionState extends StoreModule {
 	/**
 	 * Начальное состояние
 	 */
 	initState() {
 		return {
 			token: '',
-			phone: '',
-			email: '',
 			username: '',
 			error: '',
 			waiting: true,
@@ -64,10 +62,7 @@ class UserState extends StoreModule {
 							...this.getState(),
 							token: token,
 							username: json.result.profile.name,
-							phone: json.result.profile.phone,
-							email: json.result.email,
-							userProfile: json.result,
-							waiting: false
+							waiting: false,
 						},
 						'Пользователь верифицирован, данные загружены'
 					);
@@ -95,10 +90,6 @@ class UserState extends StoreModule {
 	}
 
 	async login(body) {
-		this.setState(
-			{ ...this.getState(), waiting: true, error: '' },
-			'Проверка данных авторизации'
-		);
 		try {
 			const response = await fetch('/api/v1/users/sign', {
 				method: 'POST',
@@ -114,7 +105,8 @@ class UserState extends StoreModule {
 						...this.getState(),
 						token: json.result.token,
 						username: json.result.user.profile.name,
-						waiting: false
+						waiting: false,
+						error: '',
 					},
 					'Данные пользователя загружены'
 				);
@@ -123,17 +115,17 @@ class UserState extends StoreModule {
 				this.setState({
 					...this.getState(),
 					error: json.error.message,
-					waiting: false
+					waiting: false,
 				});
 			}
 		} catch (err) {
 			this.setState({
 				...this.getState(),
 				error: 'Server Error',
-				waiting: false
+				waiting: false,
 			});
-		} 
+		}
 	}
 }
 
-export default UserState;
+export default SessionState;
