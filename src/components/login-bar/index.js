@@ -4,7 +4,8 @@ import './style.css';
 
 function LoginBar(props) {
 	const cn = bem('LoginBar');
-
+	
+	
 	return (
 		<div className={cn()}>
 			{props.user && (

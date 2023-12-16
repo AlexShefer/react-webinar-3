@@ -4,14 +4,12 @@ import LocaleSelect from '../../containers/locale-select';
 import Navigation from '../../containers/navigation';
 import ProfileCard from '../../components/profile-card';
 import useTranslate from '../../hooks/use-translate';
-import LoginBar from '../../components/login-bar';
 import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
 import Spinner from '../../components/spinner';
 
 function Profile() {
 	const { t } = useTranslate();
-	const store = useStore();
 	const select = useSelector((store) => ({
 		username: store.user.username,
 		phone: store.user.phone,

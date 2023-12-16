@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { objectToQueryString } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
@@ -7,6 +9,8 @@ function LoginForm(props) {
 		login: '',
 		password: '',
 	});
+	const navigate = useNavigate()
+
 	const cn = bem('LoginForm');
 	const callbacks = {
 		onChange: (e) => {
@@ -18,6 +22,11 @@ function LoginForm(props) {
 		handleSubmitForm: (e) => {
 			e.preventDefault();
 			props.onLogin(user);
+			if (props.location.state.location === "/" || props.location.state.location === "/user/login") {
+				navigate(`/?${objectToQueryString(props.location.state.searchParams)}`)
+			} else {
+				navigate(props.location.state.location)
+			}
 		},
 	};
 	return (

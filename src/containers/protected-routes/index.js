@@ -1,16 +1,17 @@
 import { Navigate, Outlet } from 'react-router-dom';
-
 import useSelector from '../../hooks/use-selector';
 function ProtectedRoutes() {
-	const token = useSelector((state) => state.user.token);
+	const select = useSelector((state) => ({
+		token: state.user.token,
+		waiting: state.user.waiting
+	}));
 
-	if (!token) {
+	if (!select.token && !select.waiting) {
 		return (
 			<Navigate
 				to="/user/login"
 				state={{
 					message: 'You must log in first',
-					from: location.pathname,
 				}}
 				replace
 			/>

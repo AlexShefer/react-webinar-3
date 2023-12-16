@@ -1,14 +1,14 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import { useEffect} from 'react';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import Main from "./main";
 import Basket from "./basket";
 import Article from "./article";
 import Profile from './profile';
 import Login from './login';
-import ProtectedRoutes from './protected-routes';
+import ProtectedRoutes from '../containers/protected-routes';
 import useStore from '../hooks/use-store';
-import InitialLayout from './initial-lauout';
+import InitialLayout from '../containers/initial-lauout';
 
 /**
  * Приложение
@@ -30,7 +30,8 @@ function App() {
       <Routes>
         <Route path={''} element={<InitialLayout/>}>
           <Route index element={<Main/>}/>
-          <Route path={'/user/login'} element={<Login/>}/>
+          {!token && <Route path={'/user/login'} element={<Login/>}/>}
+          {token && <Route path={'/user/login'} element={<Navigate to="/user/profile" />} />}
           <Route element={<ProtectedRoutes/>}>
             <Route path={'/user/profile'} element={<Profile/>}/>
           </Route>

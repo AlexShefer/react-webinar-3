@@ -1,18 +1,17 @@
-import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
 import LocaleSelect from '../../containers/locale-select';
 import Navigation from '../../containers/navigation';
 import LoginForm from '../../components/login-form';
 import useTranslate from '../../hooks/use-translate';
-import LoginBar from '../../components/login-bar';
 import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Login() {
 	const { t } = useTranslate();
 	const store = useStore();
 	const navigate = useNavigate();
+	const location = useLocation()
 
 	const select = useSelector((state) => ({
 		username: state.user.username,
@@ -38,7 +37,7 @@ function Login() {
 				<LocaleSelect />
 			</Head>
 			<Navigation />
-			<LoginForm onLogin={callbacks.onLogin} error={select.error} />
+			<LoginForm onLogin={callbacks.onLogin} error={select.error} location={location} />
 		</>
 	);
 }

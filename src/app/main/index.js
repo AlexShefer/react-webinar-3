@@ -7,7 +7,6 @@ import Head from "../../components/head";
 import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
-import useSelector from '../../hooks/use-selector';
 
 /**
  * Главная страница - первичная загрузка каталога

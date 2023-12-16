@@ -146,3 +146,22 @@ export const flattenCategoriesWithOwnId = (categories, depth = 0, parentId = nul
 
   return categoryOptions;
 };
+
+/**
+ * Преобразует объект с параметрами поиска в строку запроса.
+ *
+ * @param {Object} searchParams - Объект, содержащий параметры поиска.
+ * @returns {string|null} - Строка запроса, сгенерированная из предоставленных параметров поиска, или null, если параметры не предоставлены.
+ * @example
+ * // Использование
+ * const searchParams = { key1: 'value1', key2: 'value2' };
+ * const queryString = objectToQueryString(searchParams);
+ * // Результат: "?key1=value1&key2=value2"
+ */
+export const objectToQueryString = (searchParams) => {
+  if (searchParams) {
+    return new URLSearchParams(searchParams);
+  } else {
+    return null;
+  }
+};

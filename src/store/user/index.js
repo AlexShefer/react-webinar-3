@@ -11,7 +11,7 @@ class UserState extends StoreModule {
 			email: '',
 			username: '',
 			error: '',
-			waiting: false,
+			waiting: true,
 		};
 	}
 
