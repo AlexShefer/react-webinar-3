@@ -1,16 +1,20 @@
 import {memo} from "react";
 import PropTypes, { arrayOf } from 'prop-types';
+import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
 function Select(props) {
+
+  const cn = bem('Select');
+
   const onSelect = (e) => {
     props.onChange(e.target.value);
   };
 
   return (
-    <select className="Select" value={props.value} onChange={onSelect}>
+    <select className={cn({theme: props.theme})} value={props.value} onChange={onSelect}>
       {props.options.map(item => (
-        <option key={item.title} value={item.value}>{item.title}</option>
+        <option className={cn('option')} key={item.title} value={item.value}>{item.title}</option>
       ))}
     </select>
   )

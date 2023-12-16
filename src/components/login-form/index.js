@@ -9,9 +9,7 @@ function LoginForm(props) {
 		login: '',
 		password: '',
 	});
-	console.log(props);
 	const cn = bem('LoginForm');
-	console.log(props);
 	const callbacks = {
 		onChange: (e) => {
 			setUser((prev) => ({
@@ -53,7 +51,6 @@ function LoginForm(props) {
 			? props.location.state.message
 			: '',
 	};
-	console.log(option.redirectionMessage);
 	return (
 		<>
 			{callbacks.onRedirect()}
