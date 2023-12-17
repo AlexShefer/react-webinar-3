@@ -9,6 +9,7 @@ function LoginForm(props) {
 		login: '',
 		password: '',
 	});
+	const [error, setError] = useState()
 	const cn = bem('LoginForm');
 	const callbacks = {
 		onChange: (e) => {
@@ -22,7 +23,7 @@ function LoginForm(props) {
 			props.onLogin(user);
 		},
 		onRedirect: () => {
-			if (!props.error && props.token) {
+			if (!props.error && props.isLogged) {
 				if (props.location.state && props.location.state.location) {
 					if (
 						props.location.state.location === '/user/login' ||

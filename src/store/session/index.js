@@ -6,6 +6,7 @@ class SessionState extends StoreModule {
 	 */
 	initState() {
 		return {
+			isLogged: false,
 			token: '',
 			username: '',
 			error: '',
@@ -37,7 +38,7 @@ class SessionState extends StoreModule {
 		);
 	}
 
-	async isLogged() {
+	async tokenValidation() {
 		this.setState(
 			{ ...this.getState(), waiting: true, error: '' },
 			'Проверка данных авторизации'
@@ -61,6 +62,7 @@ class SessionState extends StoreModule {
 						{
 							...this.getState(),
 							token: token,
+							isLogged: true,
 							username: json.result.profile.name,
 							waiting: false,
 						},
@@ -72,6 +74,7 @@ class SessionState extends StoreModule {
 							...this.getState(),
 							user: '',
 							token: '',
+							isLogged: false,
 						},
 						'Удаляем токен не прошедший валидацию удаляем данные профиля'
 					);
@@ -79,7 +82,7 @@ class SessionState extends StoreModule {
 					localStorage.removeItem('token');
 				}
 			} catch (err) {
-				this.setState({ ...this.getState, error: 'Ошибка Сервера' });
+				this.setState({ ...this.initState(), error: 'Ошибка Сервера' });
 			}
 		} else {
 			this.setState(
@@ -112,9 +115,10 @@ class SessionState extends StoreModule {
 				);
 				localStorage.setItem('token', json.result.token);
 			} else {
+				console.log(json);
 				this.setState({
 					...this.getState(),
-					error: json.error.message,
+					error: json.error.data.issues[0].message,
 					waiting: false,
 				});
 			}

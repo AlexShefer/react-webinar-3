@@ -2,11 +2,11 @@ import { Navigate, Outlet } from 'react-router-dom';
 import useSelector from '../../hooks/use-selector';
 function ProtectedRoutes() {
 	const select = useSelector((state) => ({
-		token: state.session.token,
+		isLogged: state.session.isLogged,
 		waiting: state.session.waiting
 	}));
 
-	if (!select.token && !select.waiting) {
+	if (!select.isLogged && !select.waiting) {
 		return (
 			<Navigate
 				to="/user/login"

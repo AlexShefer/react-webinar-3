@@ -16,6 +16,7 @@ function Login() {
 	const select = useSelector((state) => ({
 		username: state.session.username,
 		token: state.session.token,
+		isLogged: state.session.isLogged,
 		error: state.session.error,
 		waiting: state.session.waiting,
 	}));
@@ -23,9 +24,6 @@ function Login() {
 	const callbacks = {
 		onLogin: (body) => {
 			store.actions.session.login(body);
-		},
-		isLogged: () => {
-			store.actions.session.isLogged();
 		},
 		onLogout: () => {
 			store.actions.session.logout();
@@ -37,7 +35,7 @@ function Login() {
 				<LocaleSelect />
 			</Head>
 			<Navigation />
-			<LoginForm onLogin={callbacks.onLogin} error={select.error} token={select.token} location={location} />
+			<LoginForm onLogin={callbacks.onLogin} error={select.error} isLogged={select.isLogged} location={location} />
 		</>
 	);
 }

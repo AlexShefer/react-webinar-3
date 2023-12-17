@@ -19,7 +19,7 @@ function App() {
   const token = useSelector((state) => state.session.token)
 
   useEffect(() => {
-    store.actions.session.isLogged()
+    store.actions.session.tokenValidation()
   }, [token])
   
   

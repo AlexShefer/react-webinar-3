@@ -1,5 +1,5 @@
 import StoreModule from '../module';
-import {organizeCategories, flattenCategoriesWithChildIds,} from '../../utils'
+import {organizeCategories, flattenCategoriesWithOwnId,} from '../../utils'
 
 class CategoriesState extends StoreModule {
 	/**
@@ -24,7 +24,7 @@ class CategoriesState extends StoreModule {
 			);
 			const json = await response.json();
 			const organizedCategories = organizeCategories(json.result.items);
-      const categories= flattenCategoriesWithChildIds(organizedCategories);
+      const categories= flattenCategoriesWithOwnId(organizedCategories);
 			this.setState({
 				...this.getState(),
 				categories: categories,
