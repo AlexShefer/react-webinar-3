@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Head from '../../components/head';
 import LocaleSelect from '../../containers/locale-select';
 import Navigation from '../../containers/navigation';
@@ -12,6 +13,10 @@ function Login() {
 	const store = useStore();
 	const navigate = useNavigate();
 	const location = useLocation()
+
+	useEffect(() => {
+		store.actions.session.resetState()
+	}, [])
 
 	const select = useSelector((state) => ({
 		username: state.session.username,
@@ -28,7 +33,11 @@ function Login() {
 		onLogout: () => {
 			store.actions.session.logout();
 		},
+		
 	};
+
+	
+	
 	return (
 		<>
 			<Head title={t('title')}>

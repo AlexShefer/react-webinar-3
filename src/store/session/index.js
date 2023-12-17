@@ -14,6 +14,12 @@ class SessionState extends StoreModule {
 		};
 	}
 
+	resetState(){
+		this.setState(
+			{...this.initState()}
+		)
+	}
+
 	async logout() {
 		this.setState(
 			{ ...this.getState(), waiting: true, error: '' },
