@@ -44,7 +44,7 @@ function Login() {
 				<LocaleSelect />
 			</Head>
 			<Navigation />
-			<LoginForm onLogin={callbacks.onLogin} error={select.error} isLogged={select.isLogged} location={location} />
+			<LoginForm translate={t} onLogin={callbacks.onLogin} error={select.error} isLogged={select.isLogged} location={location} />
 		</>
 	);
 }

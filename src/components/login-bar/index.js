@@ -14,7 +14,7 @@ function LoginBar(props) {
 				</Link>
 			)}
 			<button onClick={props.action}>
-				{props.user ? 'Выход' : 'Вход'}
+				{props.actionLabel}
 			</button>
 		</div>
 	);

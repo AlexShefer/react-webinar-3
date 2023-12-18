@@ -56,10 +56,10 @@ function LoginForm(props) {
 		<>
 			{callbacks.onRedirect()}
 			<div className={cn()}>
-				<h2 className={cn('title')}>Вход</h2>
+				<h2 className={cn('title')}>{props.translate('login.signIn')}</h2>
 				<form className={cn('form')}>
 					<label className={cn('label')} htmlFor="login">
-						Логин
+						{props.translate("login.login")}
 					</label>
 					<input
 						className={cn('input')}
@@ -70,7 +70,7 @@ function LoginForm(props) {
 						onChange={callbacks.onChange}
 					/>
 					<label className={cn('label')} htmlFor="password">
-						Пароль
+					{props.translate("login.password")}
 					</label>
 					<input
 						className={cn('input')}
@@ -93,7 +93,7 @@ function LoginForm(props) {
 						className={cn('button')}
 						onClick={callbacks.handleSubmitForm}
 					>
-						Войти
+						{props.translate('login.signIn')}
 					</button>
 				</form>
 			</div>

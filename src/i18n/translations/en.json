@@ -1,18 +1,24 @@
 {
-  "title": "Shop",
-  "menu.main": "Main",
-  "basket.title": "Cart",
-  "basket.open": "Open",
-  "basket.close": "Close",
-  "basket.inBasket": "In cart",
-  "basket.empty": "empty",
-  "basket.total": "Total",
-  "basket.unit": "pcs",
-  "basket.delete": "Delete",
-  "article.add": "Add",
-  "filter.reset": "Reset",
-  "basket.articles": {
-    "one": "article",
-    "other": "articles"
-  }
+	"title": "Shop",
+	"menu.main": "Main",
+	"basket.title": "Cart",
+	"basket.open": "Open",
+	"basket.close": "Close",
+	"basket.inBasket": "In cart",
+	"basket.empty": "empty",
+	"basket.total": "Total",
+	"basket.unit": "pcs",
+	"basket.delete": "Delete",
+	"article.add": "Add",
+	"filter.reset": "Reset",
+	"basket.articles": {
+		"one": "article",
+		"other": "articles"
+	},
+	"login.signIn": "SignIn",
+	"login.logout": "SignOut",
+  "login.login" : "Login",
+  "login.password" : "Password",
+	"filter.all": "All",
+	"filter.search": "Search"
 }
