@@ -1,5 +1,6 @@
-import {memo} from 'react';
+import {memo, useEffect} from 'react';
 import useStore from "../../hooks/use-store";
+import useSelector from '../../hooks/use-selector';
 import useTranslate from "../../hooks/use-translate";
 import useInit from "../../hooks/use-init";
 import Navigation from "../../containers/navigation";
@@ -14,14 +15,17 @@ import LocaleSelect from "../../containers/locale-select";
 function Main() {
 
   const store = useStore();
-  
-  
+  const {t, lang} = useTranslate();
+  console.log(lang);
   useInit(() => {
     store.actions.catalog.initParams();
-    store.actions.categories.load();
-  }, [], true);
+    store.actions.categories.load(lang);
+    store.actions.catalog.setParams({lang: lang})
+  }, [lang], true);
 
-  const {t} = useTranslate();
+  
+
+  
 
   return (
     <>

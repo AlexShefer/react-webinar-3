@@ -9,7 +9,7 @@ import useSelector from '../../hooks/use-selector';
 import Spinner from '../../components/spinner';
 
 function Profile() {
-	const { t } = useTranslate();
+	const { t, lang } = useTranslate();
 
 	const store = useStore()
 
@@ -38,6 +38,7 @@ function Profile() {
 					name={select.username}
 					phone={select.phone}
 					email={select.email}
+					translate={t}
 				/>
 			</Spinner>
 		</>

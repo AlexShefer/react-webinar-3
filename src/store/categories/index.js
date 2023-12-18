@@ -13,14 +13,14 @@ class CategoriesState extends StoreModule {
 		};
 	}
 
-	async load() {
+	async load(lang) {
 		this.setState({
 			...this.initState(),
 			waiting: true,
 		}, 'Категории загружаются');
 		try {
 			const response = await fetch(
-				`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`
+				`/api/v1/categories?lang=${lang},fields=_id,title,parent(_id)&limit=*`
 			);
 			const json = await response.json();
 			const organizedCategories = organizeCategories(json.result.items);

@@ -18,10 +18,11 @@ function Article() {
 
   // Параметры из пути /articles/:id
   const params = useParams();
+  const {t, lang} = useTranslate();
 
   useInit(() => {
-    store.actions.article.load(params.id);
-  }, [params.id]);
+    store.actions.article.load(params.id, lang);
+  }, [params.id, lang]);
 
   const select = useSelector(state => ({
     article: state.article.data,
@@ -29,7 +30,6 @@ function Article() {
     username: state.profile.username
   }));
 
-  const {t} = useTranslate();
 
   const callbacks = {
     // Добавление в корзину
@@ -43,7 +43,7 @@ function Article() {
       </Head>
       <Navigation/>
       <Spinner active={select.waiting}>
-        <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
+        <ArticleCard translate={t} article={select.article} onAdd={callbacks.addToBasket} t={t}/>
       </Spinner>
     </>
   );

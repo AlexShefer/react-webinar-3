@@ -17,7 +17,7 @@ class ArticleState extends StoreModule {
    * @param id {String}
    * @return {Promise<void>}
    */
-  async load(id) {
+  async load(id, lang) {
     // Сброс текущего товара и установка признака ожидания загрузки
     this.setState({
       data: {},
@@ -25,7 +25,7 @@ class ArticleState extends StoreModule {
     });
 
     try {
-      const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+      const response = await fetch(`/api/v1/articles/${id}?lang=${lang}&fields=title,madeIn(title,code),category(title),description,edition,price`);
       const json = await response.json();
 
       // Товар загружен успешно

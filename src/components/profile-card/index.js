@@ -5,15 +5,15 @@ function ProfileCard(props) {
 	const cn = bem('ProfileCard');
 	return (
 		<div className={cn()}>
-			<h2>Профиль</h2>
+			<h2>{props.translate('profile.profile')}</h2>
 			<p className={cn('text')}>
-				Имя: <span className={cn('text_bold')}>{props.name}</span>
+			{props.translate('profile.name')}: <span className={cn('text_bold')}>{props.name}</span>
 			</p>
 			<p className={cn('text')}>
-				Телефон: <span className={cn('text_bold')}>{props.phone}</span>
+			{props.translate('profile.phone')}: <span className={cn('text_bold')}>{props.phone}</span>
 			</p>
 			<p className={cn('text')}>
-				email: <span className={cn('text_bold')}>{props.email}</span>
+			{props.translate('profile.email')}: <span className={cn('text_bold')}>{props.email}</span>
 			</p>
 		</div>
 	);

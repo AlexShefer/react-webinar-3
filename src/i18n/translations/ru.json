@@ -22,5 +22,14 @@
   "login.login" : "Логин",
   "login.password" : "Пароль",
   "filter.all": "Все",
-  "filter.search": "Поиск"
+  "filter.search": "Поиск",
+  "profile.profile" : "Профиль",
+  "profile.name" : "Имя",
+  "profile.phone" : "Телефон",
+  "profile.email" : "email",
+  "article.originCountry": "Страна производитель",
+  "article.category": "Категория",
+  "article.yearOfRelease": "Год выпуска",
+  "article.price": "Цена"
+
 }

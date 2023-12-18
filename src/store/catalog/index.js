@@ -17,7 +17,8 @@ class CatalogState extends StoreModule {
         limit: 10,
         sort: 'order',
         query: '',
-        category: ''
+        category: '',
+        lang: "ru"
       },
       count: 0,
       waiting: false
@@ -33,6 +34,7 @@ class CatalogState extends StoreModule {
   async initParams(newParams = {}) {
     const urlParams = new URLSearchParams(window.location.search);
     let validParams = {};
+    if (urlParams.has('lang')) validParams.lang = urlParams.get('page') || 'ru';
     if (urlParams.has('page')) validParams.page = Number(urlParams.get('page')) || 1;
     if (urlParams.has('limit')) validParams.limit = Math.min(Number(urlParams.get('limit')) || 10, 50);
     if (urlParams.has('sort')) validParams.sort = urlParams.get('sort');
@@ -80,6 +82,7 @@ class CatalogState extends StoreModule {
     }
 
     const apiParams = {
+      lang: params.lang,
       limit: params.limit,
       skip: (params.page - 1) * params.limit, 
       fields: 'items(*),count',

@@ -20,5 +20,16 @@
   "login.login" : "Login",
   "login.password" : "Password",
 	"filter.all": "All",
-	"filter.search": "Search"
+	"filter.search": "Search",
+  "profile.profile" : "Profile",
+  "profile.name" : "Name",
+  "profile.phone" : "phone",
+  "profile.email" : "email",
+	"article.originCountry": "Origin country",
+	"article.category": "Category",
+	"article.yearOfRelease": "Year of release",
+  "article.price": "Price"
+
+
+  
 }
