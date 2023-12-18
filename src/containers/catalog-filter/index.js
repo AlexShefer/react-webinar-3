@@ -39,7 +39,7 @@ function CatalogFilter() {
   const options = {
     sort: useMemo(() => ([
       {value: 'order', title: t('sort.order')},
-      {value: 'title.ru', title: t('sort.name')},
+      {value: `title.${lang}`, title: t('sort.name')},
       {value: '-price', title: t('sort.price')},
       {value: 'edition', title: t('sort.edition')},
     ]), [lang]),
