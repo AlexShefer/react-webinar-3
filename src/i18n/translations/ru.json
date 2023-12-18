@@ -30,6 +30,10 @@
   "article.originCountry": "Страна производитель",
   "article.category": "Категория",
   "article.yearOfRelease": "Год выпуска",
-  "article.price": "Цена"
+  "article.price": "Цена",
+  "sort.order": "По порядку",
+  "sort.name": "По именованию",
+  "sort.price": "Сначала дорогие",
+  "sort.edition": "Древние"
 
 }

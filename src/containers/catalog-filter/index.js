@@ -21,7 +21,7 @@ function CatalogFilter() {
     category: state.catalog.params.category
   }));
 
-  const {t} = useTranslate()
+  const {t,lang} = useTranslate()
 
   const callbacks = {
     // Сортировка
@@ -38,11 +38,11 @@ function CatalogFilter() {
 
   const options = {
     sort: useMemo(() => ([
-      {value: 'order', title: 'По порядку'},
-      {value: 'title.ru', title: 'По именованию'},
-      {value: '-price', title: 'Сначала дорогие'},
-      {value: 'edition', title: 'Древние'},
-    ]), []),
+      {value: 'order', title: t('sort.order')},
+      {value: 'title.ru', title: t('sort.name')},
+      {value: '-price', title: t('sort.price')},
+      {value: 'edition', title: t('sort.edition')},
+    ]), [lang]),
     category: useMemo(() => {
       const allCategory = {value: "", title: t('filter.all') };
       

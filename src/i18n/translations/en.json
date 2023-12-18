@@ -28,7 +28,11 @@
 	"article.originCountry": "Origin country",
 	"article.category": "Category",
 	"article.yearOfRelease": "Year of release",
-  "article.price": "Price"
+  "article.price": "Price",
+	"sort.order": "By order",
+  "sort.name": "By title",
+  "sort.price": "Expensive first",
+  "sort.edition": "Older first"
 
 
   
