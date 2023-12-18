@@ -1,4 +1,4 @@
-import {createContext, useMemo, useState} from "react";
+import {createContext, useMemo, useState, useEffect} from "react";
 import translate from "./translate";
 
 /**
@@ -13,7 +13,12 @@ export const I18nContext = createContext({});
  */
 export function I18nProvider({children}) {
 
-  const [lang, setLang] = useState('ru');
+  const initialLang = localStorage.getItem("lang") || "ru";
+  const [lang, setLang] = useState(initialLang);
+
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
 
   const i18n = useMemo(() => ({
     // Код локали
