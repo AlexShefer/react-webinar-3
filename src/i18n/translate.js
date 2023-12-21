@@ -1,4 +1,4 @@
-import * as translations from './translations';
+
 
 /**
  * Перевод фразу по словарю

@@ -15,11 +15,9 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <Provider store={services.redux}>
     <ServicesContext.Provider value={services}>
-      <I18nProvider>
         <BrowserRouter>
           <App/>
         </BrowserRouter>
-      </I18nProvider>
     </ServicesContext.Provider>
   </Provider>
 );
