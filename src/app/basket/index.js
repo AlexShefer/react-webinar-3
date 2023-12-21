@@ -10,10 +10,11 @@ import ModalLayout from '../../components/modal-layout';
 import BasketTotal from '../../components/basket-total';
 import modalsActions from '../../store-redux/modals/actions';
 
-function Basket() {
+function Basket({translate}) {
 
   const store = useStore();
   const dispatch = useDispatch();
+  const {t, lang} = translate;
 
   const select = useSelector(state => ({
     list: state.basket.list,
@@ -31,7 +32,7 @@ function Basket() {
     }, [store]),
   }
 
-  const {t} = useTranslate();
+  
 
   const renders = {
     itemBasket: useCallback((item) => (

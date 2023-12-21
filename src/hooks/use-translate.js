@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useLayoutEffect } from 'react';
 import useServices from './use-services';
 
 /**
@@ -6,8 +6,11 @@ import useServices from './use-services';
  */
 export default function useTranslate() {
 	const { i18n } = useServices();
-	const [lang, setLang] = useState();
-
+	const [lang, setLang] = useState(i18n.lang);
+  
+  useLayoutEffect(()=> {
+		i18n.setLang(lang)
+  }, [lang])
 	const t = (text, number) => i18n.translate(lang, text, number);
 
 	return { lang, setLang, t };

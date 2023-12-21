@@ -8,7 +8,7 @@ import SideLayout from '../../components/side-layout';
 import {useDispatch} from 'react-redux';
 import modalsActions from '../../store-redux/modals/actions';
 
-function Navigation() {
+function Navigation({translate}) {
   const store = useStore();
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ function Navigation() {
   }
 
   // Функция для локализации текстов
-  const {t} = useTranslate();
+  const {t} = translate;
 
   const options = {
     menu: useMemo(() => ([

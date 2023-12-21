@@ -1,16 +1,20 @@
-import {memo, useCallback} from 'react';
+import {memo, useCallback, useEffect} from 'react';
 import SideLayout from '../../components/side-layout';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import useTranslate from '../../hooks/use-translate';
 import useSelector from '../../hooks/use-selector';
 import useStore from '../../hooks/use-store';
 
-function TopHead() {
+function TopHead({translate}) {
 
-  const {t} = useTranslate();
+  const {t, lang} = translate;
+  console.log(t('session.signOut'));
+  
   const navigate = useNavigate();
   const location = useLocation();
   const store = useStore();
+  
+
 
   const select = useSelector(state => ({
     user: state.session.user,
