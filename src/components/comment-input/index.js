@@ -8,7 +8,7 @@ function CommentInput(props) {
 	const [comment, setComment] = useState();
 
 	const cn = bem('CommentInput');
-
+	const errorMessage = props.type === 'article' ? props.t('comments.errCommentMessage') : props.t('comments.errAnswerMessage')
 	const callbacks = {
 		onChange: (e) => {
 			setComment((prev) => e.target.value);
@@ -32,7 +32,7 @@ function CommentInput(props) {
 		commentForm: () => (
 			<>
 				<h3 className={cn('title')}>
-					Новый {props.type === 'comment' ? 'ответ' : 'комментарий'}
+					{props.t('comments.new')} {props.type === 'comment' ? props.t('comments.answer') : props.t('comments.comment')}
 				</h3>
 				<textarea
 					className={cn('input')}
@@ -41,25 +41,24 @@ function CommentInput(props) {
 					rows="10"
 				/>
 				<button className={cn('btn')} onClick={callbacks.addComment}>
-					Отправит
+					{props.t('comments.send')}
 				</button>
 				{props.type === 'comment' && (
 					<button
 						className={cn('btn')}
 						onClick={callbacks.closeCommentInput}
 					>
-						Отмена
+						{props.t('comments.cancel')}
 					</button>
 				)}
 			</>
 		),
 		loginLink: () => (
 			<p className={cn('message')}>
-				<Link className={cn('message-link')} to={'/login'}>Войдите</Link>, чтобы иметь возможность
-				ответить.{' '}
+				<Link className={cn('message-link')} to={'/login'}>{props.t('comments.toSignin')}</Link>, {errorMessage}. {' '}
 				{props.type === 'comment' && (
 					<button className={cn('message-btn')} onClick={callbacks.closeCommentInput}>
-						Отмена
+						{props.t('comments.cancel')}
 					</button>
 				)}
 			</p>

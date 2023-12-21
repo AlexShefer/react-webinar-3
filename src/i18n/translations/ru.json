@@ -28,5 +28,15 @@
   "filter.expansiveFirst": "Сначала дорогие",
   "filter.olderFirst": "Древние",
   "filter.all": "Все",
-  "filter.search": "Поиск"
+  "filter.search": "Поиск",
+  "comments.comments": "Комментарии",
+  "comments.toAnswer": "Ответить",
+  "comments.new": "Новый",
+  "comments.answer": "ответ",
+  "comments.comment": "Комментарий",
+  "comments.send": "Отправить",
+  "comments.cancel": "Отменить",
+  "comments.toSignin": "Войдите",
+  "comments.errAnswerMessage": "чтобы иметь возможность ответить",
+  "comments.errCommentMessage": "чтобы иметь возможность комментировать"
 }

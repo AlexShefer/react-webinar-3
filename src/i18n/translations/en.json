@@ -26,5 +26,15 @@
   "filter.expansiveFirst": "Expansive first",
   "filter.olderFirst": "Older first",
   "filter.all": "All",
-  "filter.search": "Search"
+  "filter.search": "Search",
+  "comments.comments": "Comments",
+  "comments.toAnswer": "Answer",
+  "comments.new": "New",
+  "comments.answer": "answer",
+  "comments.comment": "comment",
+  "comments.send": "Send",
+  "comments.cancel": "Cancel",
+  "comments.toSignin": "Sign in",
+  "comments.errAnswerMessage": "to be able to leave an answer",
+  "comments.errCommentMessage": "to be able to leave a comment"
 }

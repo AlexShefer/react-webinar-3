@@ -50,7 +50,7 @@ function Article({translate}) {
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
       </Spinner>
-      <Comments />
+      <Comments translate = {translate} />
     </PageLayout>
   );
 }

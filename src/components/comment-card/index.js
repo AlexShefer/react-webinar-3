@@ -25,6 +25,7 @@ function CommentCard(props) {
 			<p className={cn('text')}>{props.text}</p>
 			{options.isCommenting ? (
 				<CommentInput
+					t = {props.t}
 					closeCommentInput={props.closeCommentInput}
 					addComment={props.addComment}
 					id={props.id}
@@ -36,7 +37,7 @@ function CommentCard(props) {
 					className={cn('btn')}
 					onClick={() => props.openCommentInput(props.id)}
 				>
-					Ответить
+					{props.t("comments.toAnswer")}
 				</button>
 			)}
 		</div>

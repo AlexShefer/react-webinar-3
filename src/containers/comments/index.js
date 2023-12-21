@@ -13,11 +13,11 @@ import treeToList from '../../utils/tree-to-list';
 import useInit from '../../hooks/use-init';
 import useSelector from '../../hooks/use-selector';
 
-export default function Comments() {
+export default function Comments({translate}) {
 	const params = useParams();
 	const [commentingId, setCommentingId] = useState(params.id);
 	const dispatch = useDispatch();
-
+	const {t} = translate
 	useInit(() => {
 		dispatch(commentsActions.load(params.id));
 	}, [params.id, dispatch]);
@@ -63,10 +63,11 @@ export default function Comments() {
 	};
 
 	return (
-		<CommentLayout numOfComments={select.comments?.length}>
+		<CommentLayout t ={t} numOfComments={select.comments?.length}>
 			<Spinner active={select.waiting}>
 				{commentList.map((comment) => (
 					<CommentCard
+						t ={t}
 						key={comment._id + comment.date}
 						username={comment.author?.profile?.name}
 						text={comment.text}
@@ -83,6 +84,7 @@ export default function Comments() {
 				))}
 				{params.id === commentingId ? (
 					<CommentInput
+						t ={t}
 						addComment={callbacks.addComment}
 						id={params.id}
 						type={'article'}
