@@ -38,5 +38,12 @@
   "comments.cancel": "Отменить",
   "comments.toSignin": "Войдите",
   "comments.errAnswerMessage": "чтобы иметь возможность ответить",
-  "comments.errCommentMessage": "чтобы иметь возможность комментировать"
+  "comments.errCommentMessage": "чтобы иметь возможность комментировать",
+  "profile.profile": "Профиль",
+  "profile.name": "Имя",
+  "profile.phone": "Телефон",
+  "article.originCountry": "Страна производитель",
+  "article.category": "Категория",
+  "article.edition": "Год выпуска",
+  "article.price": "Цена"
 }

@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useLayoutEffect } from 'react';
+import { useCallback, useState, useEffect, useLayoutEffect, useMemo } from 'react';
 import useServices from './use-services';
 
 /**
@@ -6,12 +6,21 @@ import useServices from './use-services';
  */
 export default function useTranslate() {
 	const { i18n } = useServices();
-	const [lang, setLang] = useState(i18n.lang);
+	const [lang, setLang] = useState(i18n.getState());
+
+  const changeLang = useCallback(i18n.setLang.bind(i18n), [i18n]);
   
-  useLayoutEffect(()=> {
-		i18n.setLang(lang)
-  }, [lang])
+  const unsubscribe = useMemo((newLang) => {
+    // Подписка. Возврат функции для отписки
+    return i18n.subscribe((newLang) => {
+      setLang(prevState => newLang);
+    });
+  }, [lang]); // Нет зависимостей - исполнится один раз
+
+	// Отписка от store при демонтировании компонента
+  useLayoutEffect(() => unsubscribe, [unsubscribe]);
+
 	const t = (text, number) => i18n.translate(lang, text, number);
 
-	return { lang, setLang, t };
+	return { lang, changeLang, t };
 }

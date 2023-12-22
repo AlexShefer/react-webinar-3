@@ -15,19 +15,19 @@ import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import Comments from '../../containers/comments';
 
-function Article({translate}) {
+function Article() {
   const store = useStore();
 
   const dispatch = useDispatch();
   // Параметры из пути /articles/:id
 
   const params = useParams();
-  const {t, lang, setLang} = translate;
+  const {t} = useTranslate();
 
   useInit(() => {
     //store.actions.article.load(params.id);
     dispatch(articleActions.load(params.id));
-  }, [params.id, lang]);
+  }, [params.id]);
 
   const select = useSelector(state => ({
     article: state.article.data,
@@ -42,15 +42,15 @@ function Article({translate}) {
 
   return (
     <PageLayout>
-      <TopHead translate={translate}/>
+      <TopHead />
       <Head title={select.article.title}>
-        <LocaleSelect setLang={setLang} lang={lang}/>
+        <LocaleSelect/>
       </Head>
-      <Navigation translate={translate}/>
+      <Navigation />
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
       </Spinner>
-      <Comments translate = {translate} />
+      <Comments  />
     </PageLayout>
   );
 }

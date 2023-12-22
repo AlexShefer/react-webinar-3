@@ -4,7 +4,8 @@ import useSelector from '../../hooks/use-selector';
 import useTranslate from '../../hooks/use-translate';
 import Select from '../../components/select';
 
-function LocaleSelect({ lang, setLang }) {
+function LocaleSelect() {
+	const { lang, changeLang } = useTranslate()
 	const options = {
 		lang: useMemo(
 			() => [
@@ -15,7 +16,7 @@ function LocaleSelect({ lang, setLang }) {
 		),
 	};
 
-	return <Select onChange={setLang} value={lang} options={options.lang} />;
+	return <Select onChange={changeLang} value={lang} options={options.lang} />;
 }
 
 export default memo(LocaleSelect);

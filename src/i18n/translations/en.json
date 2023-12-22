@@ -36,5 +36,12 @@
   "comments.cancel": "Cancel",
   "comments.toSignin": "Sign in",
   "comments.errAnswerMessage": "to be able to leave an answer",
-  "comments.errCommentMessage": "to be able to leave a comment"
+  "comments.errCommentMessage": "to be able to leave a comment",
+  "profile.profile": "Profile",
+  "profile.name": "Name",
+  "profile.phone": "Phone",
+  "article.originCountry": "Country of origin",
+  "article.category": "Category",
+  "article.edition": "Year of edition",
+  "article.price": "Price"
 }

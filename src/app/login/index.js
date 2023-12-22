@@ -13,9 +13,9 @@ import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
 import useInit from '../../hooks/use-init';
 
-function Login({translate}) {
+function Login() {
 
-  const {t, lang, setLang} = translate;
+  const {t, lang, setLang} = useTranslate();
   const location = useLocation();
   const navigate = useNavigate();
   const store = useStore();
@@ -56,11 +56,11 @@ function Login({translate}) {
 
   return (
     <PageLayout>
-      <TopHead translate={translate}/>
+      <TopHead />
       <Head title={t('title')}>
-        <LocaleSelect lang={lang} setLang={setLang}/>
+        <LocaleSelect/>
       </Head>
-      <Navigation translate={translate}/>
+      <Navigation />
       <SideLayout padding='medium'>
         <form onSubmit={callbacks.onSubmit}>
           <h2>{t('auth.title')}</h2>

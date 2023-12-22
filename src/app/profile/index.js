@@ -13,7 +13,7 @@ import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
 import ProfileCard from '../../components/profile-card';
 
-function Profile({translate}) {
+function Profile() {
   const store = useStore();
 
   useInit(() => {
@@ -25,17 +25,16 @@ function Profile({translate}) {
     waiting: state.profile.waiting,
   }));
 
-  const {t, lang, setLang} = translate;
-  console.log(t('title'));
+  const {t} = useTranslate();
   return (
     <PageLayout>
-      <TopHead translate={translate}/>
+      <TopHead />
       <Head title={t('title')}>
-        <LocaleSelect lang={lang} setLang={setLang} />
+        <LocaleSelect />
       </Head>
-      <Navigation translate={translate}/>
+      <Navigation/>
       <Spinner active={select.waiting}>
-        <ProfileCard data={select.profile}/>
+        <ProfileCard data={select.profile} t={t}/>
       </Spinner>
     </PageLayout>
   );

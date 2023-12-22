@@ -12,12 +12,13 @@ import Spinner from '../../components/spinner';
 import treeToList from '../../utils/tree-to-list';
 import useInit from '../../hooks/use-init';
 import useSelector from '../../hooks/use-selector';
+import useTranslate from '../../hooks/use-translate';
 
-export default function Comments({translate}) {
+export default function Comments() {
 	const params = useParams();
 	const [commentingId, setCommentingId] = useState(params.id);
 	const dispatch = useDispatch();
-	const {t} = translate
+	const {t, lang} = useTranslate()
 	useInit(() => {
 		dispatch(commentsActions.load(params.id));
 	}, [params.id, dispatch]);
@@ -67,8 +68,9 @@ export default function Comments({translate}) {
 			<Spinner active={select.waiting}>
 				{commentList.map((comment) => (
 					<CommentCard
-						t ={t}
 						key={comment._id + comment.date}
+						t ={t}
+						lang ={lang}
 						username={comment.author?.profile?.name}
 						text={comment.text}
 						date={comment.dateCreate}

@@ -1,7 +1,7 @@
-export function formatDate(str) {
+export function formatDate(str, lang) {
 	if (str) {
 		const date = new Date(str);
-		return new Intl.DateTimeFormat('ru', {
+		return new Intl.DateTimeFormat(lang, {
 			year: 'numeric',
 			month: 'long',
 			day: 'numeric',

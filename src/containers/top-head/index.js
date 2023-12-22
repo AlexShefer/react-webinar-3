@@ -5,10 +5,9 @@ import useTranslate from '../../hooks/use-translate';
 import useSelector from '../../hooks/use-selector';
 import useStore from '../../hooks/use-store';
 
-function TopHead({translate}) {
+function TopHead() {
 
-  const {t, lang} = translate;
-  console.log(t('session.signOut'));
+  const {t} = useTranslate();
   
   const navigate = useNavigate();
   const location = useLocation();

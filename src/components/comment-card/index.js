@@ -20,7 +20,7 @@ function CommentCard(props) {
 				})}
 			>
 				{props.username}
-				<span className={cn('date')}>{formatDate(props.date)}</span>
+				<span className={cn('date')}>{formatDate(props.date, props.lang)}</span>
 			</h3>
 			<p className={cn('text')}>{props.text}</p>
 			{options.isCommenting ? (

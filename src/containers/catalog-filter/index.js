@@ -32,7 +32,7 @@ function CatalogFilter({translate}) {
       page: 1
     }), [store]),
   };
-  const {t, lang} = translate;
+  const {t, lang} = useTranslate();
   const options = {
     // Варианты сортировок
     sort: useMemo(() => ([

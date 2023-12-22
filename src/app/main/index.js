@@ -10,9 +10,9 @@ import CatalogList from '../../containers/catalog-list';
 import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
 
-function Main({translate}) {
+function Main() {
   const store = useStore();
-  const {t, lang, setLang} = translate;
+  const {t, lang} = useTranslate();
   useInit(async () => {
     await Promise.all([
       store.actions.catalog.initParams(),
@@ -23,13 +23,13 @@ function Main({translate}) {
 
   return (
     <PageLayout>
-      <TopHead translate={translate}/>
+      <TopHead />
       <Head title={t('title')}>
-        <LocaleSelect lang={lang} setLang={setLang}/>
+        <LocaleSelect />
       </Head>
-      <Navigation translate={translate}/>
-      <CatalogFilter translate={translate}/>
-      <CatalogList translate={translate}/>
+      <Navigation />
+      <CatalogFilter />
+      <CatalogList />
     </PageLayout>
   );
 }
