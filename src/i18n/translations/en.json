@@ -37,6 +37,7 @@
   "comments.toSignin": "Sign in",
   "comments.errAnswerMessage": "to be able to leave an answer",
   "comments.errCommentMessage": "to be able to leave a comment",
+  "comments.errEmptyMessage": "The comment must contain at least one character",
   "profile.profile": "Profile",
   "profile.name": "Name",
   "profile.phone": "Phone",
@@ -44,4 +45,5 @@
   "article.category": "Category",
   "article.edition": "Year of edition",
   "article.price": "Price"
+  
 }

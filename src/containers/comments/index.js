@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector as useSelectorRedux } from 'react-redux';
 import { useParams } from 'react-router';
 import shallowequal from 'shallowequal';
@@ -17,17 +17,37 @@ import useTranslate from '../../hooks/use-translate';
 export default function Comments() {
 	const params = useParams();
 	const [commentingId, setCommentingId] = useState(params.id);
+	const [formPosition, setFormPosition] = useState({
+		id: '',
+		level: '',
+	});
+	const commentInputRef = useRef(null);
 	const dispatch = useDispatch();
-	const {t, lang} = useTranslate()
+	const { t, lang } = useTranslate();
+	
 	useInit(() => {
 		dispatch(commentsActions.load(params.id));
 	}, [params.id, dispatch]);
 
-	const selectStore = useSelector((state) => ({
-		exists: state.session.exists,
-		token: state.session.token,
-		authUser: state.session.user,
-	}));
+	useEffect(() => {
+		if (commentInputRef.current) {
+			const scrollOptions = {
+				behavior: 'smooth',
+				block: 'nearest',
+				inline: 'start',
+			};
+			commentInputRef.current.scrollIntoView(scrollOptions);
+		}
+	}, [commentInputRef, commentingId]);
+
+	const selectStore = useSelector(
+		(state) => ({
+			exists: state.session.exists,
+			token: state.session.token,
+			authUser: state.session.user,
+		}),
+		shallowequal
+	);
 
 	const select = useSelectorRedux(
 		(state) => ({
@@ -60,37 +80,62 @@ export default function Comments() {
 		},
 		closeCommentInput: () => {
 			setCommentingId(params.id);
+			setFormPosition({
+				id: null,
+				level: null,
+			});
 		},
+		
 	};
-
 	return (
-		<CommentLayout t ={t} numOfComments={select.comments?.length}>
+		<CommentLayout t={t} numOfComments={select.comments?.length}>
 			<Spinner active={select.waiting}>
 				{commentList.map((comment) => (
-					<CommentCard
-						key={comment._id + comment.date}
-						t ={t}
-						lang ={lang}
-						username={comment.author?.profile?.name}
-						text={comment.text}
-						date={comment.dateCreate}
-						level={comment.level}
-						id={comment._id}
-						openCommentInput={callbacks.openCommentInput}
-						closeCommentInput={callbacks.closeCommentInput}
-						commentingId={commentingId}
-						addComment={callbacks.addComment}
-						exists={selectStore.exists}
-						authUser={selectStore.authUser}
-					/>
+					<React.Fragment key={comment._id + comment.date}>
+						<CommentCard
+							t={t}
+							lang={lang}
+							username={comment.author?.profile?.name}
+							text={comment.text}
+							date={comment.dateCreate}
+							level={comment.level}
+							id={comment._id}
+							openCommentInput={callbacks.openCommentInput}
+							closeCommentInput={callbacks.closeCommentInput}
+							commentingId={commentingId}
+							addComment={callbacks.addComment}
+							exists={selectStore.exists}
+							authUser={selectStore.authUser}
+							setFormPosition={setFormPosition}
+							lastChild={comment}
+						/>
+						{comment._id === formPosition.id && (
+							<CommentInput
+								t={t}
+								closeCommentInput={callbacks.closeCommentInput}
+								addComment={callbacks.addComment}
+								// id={comment._id}
+								type={'comment'}
+								exists={selectStore.exists}
+								level={formPosition.level}
+								setFormPosition={setFormPosition}
+								setCommentingId={setCommentingId}
+								articleId={params.id}
+								commentingId={commentingId}
+								ref={commentInputRef}
+							/>
+						)}
+					</React.Fragment>
 				))}
 				{params.id === commentingId ? (
 					<CommentInput
-						t ={t}
+						t={t}
 						addComment={callbacks.addComment}
-						id={params.id}
+						commentingId={commentingId}
 						type={'article'}
 						exists={selectStore.exists}
+						setFormPosition={setFormPosition}
+						level={-1}
 					/>
 				) : null}
 			</Spinner>

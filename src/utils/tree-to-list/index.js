@@ -13,3 +13,4 @@ export default function treeToList(tree, callback, level = 0, result = []) {
   }
   return result;
 }
+

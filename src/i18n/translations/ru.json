@@ -39,6 +39,7 @@
   "comments.toSignin": "Войдите",
   "comments.errAnswerMessage": "чтобы иметь возможность ответить",
   "comments.errCommentMessage": "чтобы иметь возможность комментировать",
+  "comments.errEmptyMessage": "Комментарий должен содержать хотя бы один символ",
   "profile.profile": "Профиль",
   "profile.name": "Имя",
   "profile.phone": "Телефон",

@@ -12,4 +12,10 @@ function CommentLayout({ children, numOfComments, t }) {
 	);
 }
 
+CommentLayout.propTypes = {
+	children: PropTypes.node, 
+	numOfComments: PropTypes.number,
+	t: PropTypes.func.isRequired,
+}
+
 export default CommentLayout;
